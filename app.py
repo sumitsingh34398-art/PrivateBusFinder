@@ -102,6 +102,13 @@ def search():
         },
         {
             "boarding":"Rampura",
+            "destination":"Pilani",
+            "time":"02:30 PM",
+            "bus":"Confirm Nhi Bus Travels",
+            "route":"Rampura → Pilani"
+        },
+        {
+            "boarding":"Rampura",
             "destination":"Bahal",
             "time":"09:00 AM",
             "bus":"Mini Bus Travels",
