@@ -1,71 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Search Result</title>
 
-<meta charset="UTF-8">
-
-<title>Bus Result</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
 <header class="topbar">
 
-<div class="logo">
+    <div class="logo">
+        🚌 <span>Private Bus Finder</span>
+    </div>
 
-🚌 Private Bus Finder
-
-</div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/timetable">Timetable</a>
+        <a href="/about">About</a>
+    </nav>
 
 </header>
 
 <div class="card">
 
-<h2>
+    <h2>Search Result</h2>
 
-{{ boarding }}
+    <h3>
+        Route :
+        {{ boarding.title() }}
+        →
+        {{ destination.title() }}
+    </h3>
 
-➡
+    {% if buses %}
 
-{{ destination }}
+        {% for bus in buses %}
 
-</h2>
+        <div class="bus-card">
 
-<br>
+            <h3>🚌 {{ bus.bus }}</h3>
 
-{% if buses %}
+            <p>🕗 {{ bus.time }}</p>
 
-    {% for bus in buses %}
+        </div>
 
-    <div class="bus-card">
+        {% endfor %}
 
-        <h3>{{ bus.time }}</h3>
+    {% else %}
 
-        <p>{{ bus.bus }}</p>
+        <div class="no-bus">
 
-        <p>{{ bus.route }}</p>
+            <h3>❌ No Bus Found</h3>
 
-    </div>
+            <p>Try another route.</p>
+
+        </div>
+
+    {% endif %}
 
     <br>
 
-    {% endfor %}
-
-{% else %}
-
-<div class="no-bus">
-
-    <h2>🚌 No Bus Found</h2>
-
-    <p>No buses are available for this route.</p>
-
-</div>
-
-{% endif %}
+    <a href="/">← Back</a>
 
 </div>
 
