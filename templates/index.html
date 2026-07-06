@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Bus Finder</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        🚌 <span>Private Bus Finder</span>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#">Timetable</a>
+        <a href="#">About</a>
+    </nav>
+
+</header>
+
+<div class="card">
+
+    <h2>Search Bus Timetable</h2>
+
+    <form action="/search" method="POST">
+
+        <input
+        type="text"
+        name="boarding"
+        placeholder="📍 Boarding Station"
+        required>
+
+        <input
+        type="text"
+        name="destination"
+        placeholder="📍 Destination Station"
+        required>
+
+        <button type="submit">
+            Search Bus
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
