@@ -103,8 +103,8 @@ def search():
         {
             "boarding":"Rampura",
             "destination":"Pilani",
-            "time":"02:30 PM",
-            "bus":"Confirm Nhi Bus Travels",
+            "time":"04:30 PM",
+            "bus":"Billu Bus Travels",
             "route":"Rampura → Pilani"
         },
         {
