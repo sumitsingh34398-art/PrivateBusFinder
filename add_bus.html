@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Bus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+
+<h1>➕ Add New Bus</h1>
+
+<form action="/save-bus" method="POST">
+
+<input type="text" name="boarding" placeholder="Boarding" required>
+
+<input type="text" name="destination" placeholder="Destination" required>
+
+<input type="text" name="time" placeholder="Time" required>
+
+<input type="text" name="bus" placeholder="Bus Name" required>
+
+<button type="submit">Save Bus</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
