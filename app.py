@@ -6,6 +6,15 @@ buses = []
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/timetable")
+def timetable():
+    return render_template("timetable.html")
+    
 @app.route("/admin")
 def admin():
     return render_template("admin_login.html")
