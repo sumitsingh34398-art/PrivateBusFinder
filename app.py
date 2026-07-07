@@ -201,7 +201,7 @@ def search():
             "route": [
                 "Pilani",
                 "Bishanpura",
-                "Hrmeenpur",
+                "Hemeenpur",
                 "Bangothari",
                 "Beri",
                 "Rampura"
