@@ -72,70 +72,140 @@ def search():
             "destination":"Pilani",
             "time":"08:30 AM",
             "bus":"Billu Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
+            
         },
         {
             "boarding":"Rampura",
             "destination":"Pilani",
             "time":"10:00 AM",
             "bus":"Pawan Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
         },
         {
             "boarding":"Rampura",
             "destination":"Pilani",
             "time":"11:15 AM",
             "bus":"No Name Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
         },
         {
             "boarding":"Rampura",
             "destination":"Pilani",
             "time":"11:45 AM",
             "bus":"Mini Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
         },
         {
             "boarding":"Rampura",
             "destination":"Pilani",
             "time":"12:45 PM",
             "bus":"Billu Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
         },
         {
             "boarding":"Rampura",
             "destination":"Pilani",
             "time":"02:30 PM",
             "bus":"Confirm Nhi Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
         },
         {
             "boarding":"Rampura",
             "destination":"Pilani",
             "time":"04:30 PM",
             "bus":"Billu Bus Travels",
-            "route":"Rampura → Pilani"
+            "route": [
+                "Rampura",
+                "Beri",
+                "Bangothari",
+                "Hemeenpur",
+                "Bishanpura",
+                "Pilani",
+            ]
         },
         {
             "boarding":"Rampura",
             "destination":"Bahal",
             "time":"09:00 AM",
             "bus":"Mini Bus Travels",
-            "route":"Rampura → Bahal"
+            "route": [
+                "Rampura",
+                "Gugalwa",
+                "Sorda Jadid",
+                "Sorda Kadim",
+                "Bahal"
+            ]
         },
         {
             "boarding":"Pilani",
             "destination":"Rampura",
             "time":"08:00 AM",
             "bus":"Mini Bus Travels",
-            "route":"Pilani → Rampura"
+            "route": [
+                "Pilani",
+                "Bishanpura",
+                "Hemeenpur",
+                "Bangothari",
+                "Beri",
+                "Rampura"
+            ]
         },
         {
             "boarding":"Pilani",
             "destination":"Rampura",
             "time":"10:15 AM",
             "bus":"Billu Bus Travels",
-            "route":"Pilani → Rampura"
+            "route": [
+                "Pilani",
+                "Bishanpura",
+                "Hrmeenpur",
+                "Bangothari",
+                "Beri",
+                "Rampura"
+            ]
         }
     ]
     filtered_buses = []
@@ -149,6 +219,12 @@ def search():
         destination=destination,
         buses=filtered_buses
     )
+    
+@app.route("/route/<int:bus_index>")
+def route_details(bus_index):
+    global buses
+    bus = buses[bus_index]
+    return render_template("route.html", bus=bus)
 
 if __name__ == "__main__":
     app.run(debug=True)
