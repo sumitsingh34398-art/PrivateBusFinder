@@ -35,19 +35,23 @@
 
     {% if buses %}
 
-        {% for bus in buses %}
+{% for bus in buses %}
 
-        <div class="bus-card">
+<div class="bus-card">
 
-            <h3>🚌 {{ bus.bus }}</h3>
+    <h3>🚌 {{ bus.bus }}</h3>
 
-            <p>🕗 {{ bus.time }}</p>
+    <p>🕒 {{ bus.time }}</p>
 
-        </div>
+    <a href="/route/{{ loop.index0 }}" class="route-btn">
+        View Route
+    </a>
 
-        {% endfor %}
+</div>
 
-    {% else %}
+{% endfor %}
+
+{% else %}
 
         <div class="no-bus">
 
