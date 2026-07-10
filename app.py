@@ -30,7 +30,8 @@ def init_db_automatically():
     if cursor.fetchone()[0] == 0:
         default_buses = [
             ("Rampura", "Pilani", "Billu Bus Travels", "08:30 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-            ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani")
+            ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+            
         ]
         cursor.executemany("INSERT INTO buses (boarding, destination, bus_name, departure_time, route) VALUES (?, ?, ?, ?, ?)", default_buses)
         conn.commit()
