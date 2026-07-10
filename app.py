@@ -10,12 +10,10 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-# ऑटोमैटिक डेटाबेस सेटअप (टेबल और असली डिफ़ॉल्ट डेटा लोड करने के लिए)
+# ऑटोमैटिक डेटाबेस सेटअप (टेबल और डिफ़ॉल्ट डेटा)
 def init_db_automatically():
     conn = get_db_connection()
     cursor = conn.cursor()
-    
-    # 1. बसों के लिए टेबल बनाना
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS buses (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,38 +25,18 @@ def init_db_automatically():
     )
     """)
     
-    # 2. बीच के गाँवों (Exact Values) के साथ डिफ़ॉल्ट डेटा
-    default_buses = [
-        ("Rampura", "Pilani", "Billu Bus Travels", "08:30 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        ("Rampura", "Pilani", "No Name Bus Travels", "11:15 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        ("Rampura", "Pilani", "Mini Bus Travels", "11:45 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        ("Rampura", "Pilani", "Billu Bus Travels", "12:45 PM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        ("Rampura", "Pilani", "Confirm Nhi Bus Travels", "02:30 PM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        ("Rampura", "Pilani", "Billu Bus Travels", "04:30 PM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-        
-        # रामपुर से बहल के बीच के सारे असली गाँव तीर (→) के साथ
-        ("Rampura", "Bahal", "Mini Bus Travels", "09:00 AM", "Rampura → Gugalwa → Sorda Jadid → Sorda Kadim → Bahal"),
-        
-        ("Pilani", "Rampura", "Mini Bus Travels", "08:00 AM", "Pilani → Bishanpura → Hemeenpur → Bangothari → Beri → Rampura"),
-        ("Pilani", "Rampura", "Billu Bus Travels", "10:15 AM", "Pilani → Bishanpura → Hemeenpur → Bangothari → Beri → Rampura")
-    ]
-    
-    # चेक करना कि डेटा खाली है या नहीं, ताकि बार-बार डुप्लिकेट न हो
+    # चेक करें कि डेटाबेस खाली है या नहीं
     cursor.execute("SELECT COUNT(*) FROM buses")
     if cursor.fetchone()[0] == 0:
-        cursor.executemany("""
-        INSERT INTO buses (boarding, destination, bus_name, departure_time, route)
-        VALUES (?, ?, ?, ?, ?)
-        """, default_buses)
+        default_buses = [
+            ("Rampura", "Pilani", "Billu Bus Travels", "08:30 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+            ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani")
+        ]
+        cursor.executemany("INSERT INTO buses (boarding, destination, bus_name, departure_time, route) VALUES (?, ?, ?, ?, ?)", default_buses)
         conn.commit()
-        print("🎉 सभी बसें और बीच के गाँव डेटाबेस में लोड हो चुके हैं!")
-        
     conn.close()
 
-# ऐप चालू होते ही डेटाबेस को सिंक करें
 init_db_automatically()
-
 
 # --- USER URL ROUTES ---
 
@@ -66,45 +44,23 @@ init_db_automatically()
 def home():
     return render_template("index.html")
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-@app.route("/timetable")
-def timetable():
-    return render_template("timetable.html")
-
 @app.route("/search", methods=["POST"])
 def search():
     boarding = request.form["boarding"].strip()
     destination = request.form["destination"].strip()
-
     conn = get_db_connection()
-    # LIKE ऑपरेटर ताकि छोटा-बड़ा अक्षर (Case Insensitive) सब मैच हो जाए
-    filtered_buses = conn.execute("""
-        SELECT * FROM buses 
-        WHERE boarding LIKE ? AND destination LIKE ?
-    """, (f"%{boarding}%", f"%{destination}%")).fetchall()
+    filtered_buses = conn.execute("SELECT * FROM buses WHERE boarding LIKE ? AND destination LIKE ?", 
+                                  (f"%{boarding}%", f"%{destination}%")).fetchall()
     conn.close()
-
-    return render_template(
-        "result.html",
-        filtered_buses=filtered_buses,
-        boarding=boarding,
-        destination=destination
-    )
+    return render_template("result.html", filtered_buses=filtered_buses, boarding=boarding, destination=destination)
 
 @app.route("/route/<int:bus_id>")
 def route_details(bus_id):
     conn = get_db_connection()
     bus = conn.execute("SELECT * FROM buses WHERE id = ?", (bus_id,)).fetchone()
     conn.close()
-    
-    if bus is None:
-        return "Bus Route Not Found!", 404
-        
+    if bus is None: return "Bus Route Not Found!", 404
     return render_template("route.html", bus=bus)
-
 
 # --- ADMIN URL ROUTES ---
 
@@ -114,9 +70,7 @@ def admin():
 
 @app.route("/admin-login", methods=["POST"])
 def admin_login():
-    username = request.form["username"]
-    password = request.form["password"]
-    if username == "admin" and password == "1234":
+    if request.form["username"] == "admin" and request.form["password"] == "1234":
         return redirect(url_for("dashboard"))
     return "Invalid Username or Password"
 
@@ -130,22 +84,13 @@ def add_bus():
 
 @app.route("/save-bus", methods=["POST"])
 def save_bus():
-    boarding = request.form["boarding"].strip()
-    destination = request.form["destination"].strip()
-    time = request.form["time"].strip()
-    bus_name = request.form["bus"].strip()
-    route = request.form["route"].strip()
-    
     conn = get_db_connection()
-    conn.execute("""
-        INSERT INTO buses (boarding, destination, bus_name, departure_time, route)
-        VALUES (?, ?, ?, ?, ?)
-    """, (boarding, destination, bus_name, time, route))
+    conn.execute("INSERT INTO buses (boarding, destination, bus_name, departure_time, route) VALUES (?, ?, ?, ?, ?)",
+                 (request.form["boarding"].strip(), request.form["destination"].strip(), request.form["bus"].strip(), request.form["time"].strip(), request.form["route"].strip()))
     conn.commit()
     conn.close()
     return redirect(url_for("dashboard"))
 
-# 🌟 1. सभी बसों को एक साथ देखने के लिए रूट
 @app.route("/view-buses")
 def view_buses():
     conn = get_db_connection()
@@ -153,12 +98,18 @@ def view_buses():
     conn.close()
     return render_template("view_buses.html", buses=all_buses)
 
-# 🌟 2. लॉगआउट करके वापस लॉगिन पेज पर भेजने के लिए रूट
+# 🌟 डिलीट करने वाला रूट (Complete)
+@app.route("/delete-bus/<int:bus_id>")
+def delete_bus(bus_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM buses WHERE id = ?", (bus_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("view_buses"))
+
 @app.route("/logout")
 def logout():
-    # यहाँ आप चाहें तो सेशन क्लियर कर सकते हैं, अभी के लिए सीधे लॉगिन पर भेज रहे हैं
     return redirect(url_for("admin"))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
