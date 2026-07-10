@@ -4,37 +4,34 @@
     <title>Route Details</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
     <div class="route-card">
-
         <h1 class="route-title">🚌 Route Details</h1>
     
         <div class="route-name">
             {{ bus.boarding }} → {{ bus.destination }}
         </div>
+        
         <div class="bus-info">
-
-            <h3>🚌 {{ bus.bus }}</h3>
-        
-            <p>🕒 Departure Time : {{ bus.time }}</p>
-        
+            <h3>🚌 {{ bus.bus_name }}</h3>
+            <p>🕒 Departure Time : {{ bus.departure_time }}</p>
         </div>
     
         <div class="timeline">
-            {% for place in bus.route %}
+            {% set clean_route = bus.route.replace('->', '→') %}
+            {% for place in clean_route.split('→') %}
+                {% if place.strip() %}
                 <div class="stop">
                     <div class="circle"></div>
                     <div class="box">
-                        <h3>{{ place}}</h3>
+                        <h3>{{ place.strip() }}</h3>
                     </div>
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
     
-        <a href="/" class="back-btn">⬅ Back</a>
-    
+        <a href="javascript:history.back()" class="back-btn">⬅ Back</a>
     </div>
-
 </body>
 </html>
