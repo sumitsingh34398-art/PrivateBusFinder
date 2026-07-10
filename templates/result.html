@@ -33,9 +33,9 @@
         {{ destination.title() }}
     </h3>
 
-    {% if buses %}
+    {% if filtered_buses %}
 
-{% for bus in buses %}
+{% for bus in filtered_buses %}
 
 <div class="bus-card">
 
@@ -43,7 +43,7 @@
 
     <p>🕒 {{ bus.time }}</p>
 
-    <a href="/route/{{ loop.index0 }}" class="route-btn">
+    <a href="/route/{{ bus.index }}" class="route-btn">
         View Route
     </a>
 
