@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Buses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .container { text-align: center; margin-top: 20px; font-family: Arial, sans-serif; }
+        
+        /* 🔍 सर्च बॉक्स का सुंदर स्टाइल */
+        .search-container {
+            margin: 20px auto;
+            width: 90%;
+            text-align: left;
+            display: flex;
+            gap: 10px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        .admin-table { width: 90%; margin: 10px auto 20px auto; border-collapse: collapse; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .admin-table th, .admin-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        .admin-table th { background-color: #4CAF50; color: white; }
+        
+        /* कोई बस न मिलने पर दिखने वाला मैसेज */
+        .no-match {
+            display: none;
+            color: #ff5722;
+            font-size: 18px;
+            margin: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚌 All Registered Buses</h1>
+
+        <!-- 🔍 लाइव सर्च बार सेक्शन -->
+        <div class="search-container">
+            <input type="text" id="busSearchInput" class="search-input" onkeyup="filterBuses()" placeholder="🔍 यहाँ बस का नाम, From, या To लिखकर सर्च करें...">
+        </div>
+
+        <!-- अगर सर्च मैच न हो तो यह मैसेज दिखेगा -->
+        <div id="noMatchMessage" class="no-match">❌ कोई बस नहीं मिली!</div>
+
+        <table class="admin-table" id="busesTable">
+            <thead>
+                <tr>
+                    <th>Bus Name</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Time</th>
+                    <th>Route</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bus in buses %}
+                <tr>
+                    <td><strong>{{ bus.bus_name }}</strong></td>
+                    <td>{{ bus.boarding }}</td>
+                    <td>{{ bus.destination }}</td>
+                    <td>{{ bus.departure_time }}</td>
+                    <td>{{ bus.route }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="/dashboard" class="back-btn" style="text-decoration: none; padding: 10px 20px; background: #333; color: white; border-radius: 5px; display: inline-block;">⬅ Back to Dashboard</a>
+    </div>
+
+    <!-- 🌟 फिक्स की हुई लाइव सर्च स्क्रिप्ट -->
+    <script>
+    function filterBuses() {
+        var input = document.getElementById("busSearchInput");
+        var filter = input.value.toLowerCase().trim(); // यहाँ एरर को .trim() से फिक्स कर दिया है
+        var table = document.getElementById("busesTable");
+        var tr = table.getElementsByTagName("tr");
+        var noMatchMessage = document.getElementById("noMatchMessage");
+        var hasVisibleRow = false;
+
+        // टेबल की हर रो (Row) को चेक करें (हेडर छोड़कर, i=1 से शुरू)
+        for (var i = 1; i < tr.length; i++) {
+            var rowText = tr[i].textContent || tr[i].innerText;
+            if (rowText.toLowerCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                hasVisibleRow = true;
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+
+        // अगर कोई भी बस मैच नहीं हुई तो मैसेज दिखाएं और टेबल छुपाएं
+        if (hasVisibleRow) {
+            noMatchMessage.style.display = "none";
+            table.style.display = "";
+        } else {
+            noMatchMessage.style.display = "block";
+            table.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>
