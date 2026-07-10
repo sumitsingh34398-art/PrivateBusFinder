@@ -1,7 +1,66 @@
 from flask import Flask, render_template, request, redirect, url_for
+import sqlite3
+import os
 
 app = Flask(__name__)
-buses = []
+
+# डेटाबेस कनेक्शन के लिए फंक्शन
+def get_db_connection():
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    return conn
+
+# ऑटोमैटिक डेटाबेस सेटअप (टेबल और असली डिफ़ॉल्ट डेटा लोड करने के लिए)
+def init_db_automatically():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # 1. बसों के लिए टेबल बनाना
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS buses (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        boarding TEXT,
+        destination TEXT,
+        bus_name TEXT,
+        departure_time TEXT,
+        route TEXT
+    )
+    """)
+    
+    # 2. बीच के गाँवों (Exact Values) के साथ डिफ़ॉल्ट डेटा
+    default_buses = [
+        ("Rampura", "Pilani", "Billu Bus Travels", "08:30 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        ("Rampura", "Pilani", "No Name Bus Travels", "11:15 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        ("Rampura", "Pilani", "Mini Bus Travels", "11:45 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        ("Rampura", "Pilani", "Billu Bus Travels", "12:45 PM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        ("Rampura", "Pilani", "Confirm Nhi Bus Travels", "02:30 PM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        ("Rampura", "Pilani", "Billu Bus Travels", "04:30 PM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
+        
+        # रामपुर से बहल के बीच के सारे असली गाँव तीर (→) के साथ
+        ("Rampura", "Bahal", "Mini Bus Travels", "09:00 AM", "Rampura → Gugalwa → Sorda Jadid → Sorda Kadim → Bahal"),
+        
+        ("Pilani", "Rampura", "Mini Bus Travels", "08:00 AM", "Pilani → Bishanpura → Hemeenpur → Bangothari → Beri → Rampura"),
+        ("Pilani", "Rampura", "Billu Bus Travels", "10:15 AM", "Pilani → Bishanpura → Hemeenpur → Bangothari → Beri → Rampura")
+    ]
+    
+    # चेक करना कि डेटा खाली है या नहीं, ताकि बार-बार डुप्लिकेट न हो
+    cursor.execute("SELECT COUNT(*) FROM buses")
+    if cursor.fetchone()[0] == 0:
+        cursor.executemany("""
+        INSERT INTO buses (boarding, destination, bus_name, departure_time, route)
+        VALUES (?, ?, ?, ?, ?)
+        """, default_buses)
+        conn.commit()
+        print("🎉 सभी बसें और बीच के गाँव डेटाबेस में लोड हो चुके हैं!")
+        
+    conn.close()
+
+# ऐप चालू होते ही डेटाबेस को सिंक करें
+init_db_automatically()
+
+
+# --- URL ROUTES ---
 
 @app.route("/")
 def home():
@@ -21,204 +80,50 @@ def admin():
 
 @app.route("/admin-login", methods=["POST"])
 def admin_login():
-
     username = request.form["username"]
     password = request.form["password"]
-
     if username == "admin" and password == "1234":
         return redirect(url_for("dashboard"))
-
     return "Invalid Username or Password"
+
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
 @app.route("/add-bus")
 def add_bus():
     return render_template("add_bus.html")
+
 @app.route("/save-bus", methods=["POST"])
 def save_bus():
-    boarding = request.form["boarding"]
-    destination = request.form["destination"]
-    time = request.form["time"]
-    bus = request.form["bus"]
-    route = boarding + " → " + destination
+    boarding = request.form["boarding"].strip()
+    destination = request.form["destination"].strip()
+    time = request.form["time"].strip()
+    bus_name = request.form["bus"].strip()
+    route = request.form["route"].strip()
     
-    print(boarding)
-    print(destination)
-    print(time)
-    print(bus)
-    print(route)
-    
-    buses.append({
-        "boarding": boarding,
-        "destination": destination,
-        "time": time,
-        "bus": bus,
-        "route": route
-    })
+    conn = get_db_connection()
+    conn.execute("""
+        INSERT INTO buses (boarding, destination, bus_name, departure_time, route)
+        VALUES (?, ?, ?, ?, ?)
+    """, (boarding, destination, bus_name, time, route))
+    conn.commit()
+    conn.close()
     return redirect(url_for("dashboard"))
 
 @app.route("/search", methods=["POST"])
 def search():
-    
-    global buses
+    boarding = request.form["boarding"].strip()
+    destination = request.form["destination"].strip()
 
-    boarding = request.form["boarding"].strip().lower()
-    destination = request.form["destination"].strip().lower()
+    conn = get_db_connection()
+    # LIKE ऑपरेटर ताकि छोटा-बड़ा अक्षर (Case Insensitive) सब मैच हो जाए
+    filtered_buses = conn.execute("""
+        SELECT * FROM buses 
+        WHERE boarding LIKE ? AND destination LIKE ?
+    """, (f"%{boarding}%", f"%{destination}%")).fetchall()
+    conn.close()
 
-    buses = [
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"08:30 AM",
-            "bus":"Billu Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-            
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"10:00 AM",
-            "bus":"Pawan Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"11:15 AM",
-            "bus":"No Name Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"11:45 AM",
-            "bus":"Mini Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"12:45 PM",
-            "bus":"Billu Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"02:30 PM",
-            "bus":"Confirm Nhi Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Pilani",
-            "time":"04:30 PM",
-            "bus":"Billu Bus Travels",
-            "route": [
-                "Rampura",
-                "Beri",
-                "Bangothari",
-                "Hemeenpur",
-                "Bishanpura",
-                "Pilani",
-            ]
-        },
-        {
-            "boarding":"Rampura",
-            "destination":"Bahal",
-            "time":"09:00 AM",
-            "bus":"Mini Bus Travels",
-            "route": [
-                "Rampura",
-                "Gugalwa",
-                "Sorda Jadid",
-                "Sorda Kadim",
-                "Bahal"
-            ]
-        },
-        {
-            "boarding":"Pilani",
-            "destination":"Rampura",
-            "time":"08:00 AM",
-            "bus":"Mini Bus Travels",
-            "route": [
-                "Pilani",
-                "Bishanpura",
-                "Hemeenpur",
-                "Bangothari",
-                "Beri",
-                "Rampura"
-            ]
-        },
-        {
-            "boarding":"Pilani",
-            "destination":"Rampura",
-            "time":"10:15 AM",
-            "bus":"Billu Bus Travels",
-            "route": [
-                "Pilani",
-                "Bishanpura",
-                "Hemeenpur",
-                "Bangothari",
-                "Beri",
-                "Rampura"
-            ]
-        }
-    ]
-    # ध्यान रखें: यह पूरा कोड आपके 'def search():' फंक्शन के अंदर होना चाहिए
-    
-    filtered_buses = []
-
-    for index, bus in enumerate(buses):
-        # .lower() कंपैरिजन सही रखने के लिए (दोनों तरफ .lower() लगाया है)
-        if bus["boarding"].lower() == boarding.lower() and bus["destination"].lower() == destination.lower():
-            bus["index"] = index  # यहाँ हम बस के अंदर उसका सही ओरिजinal इंडेक्स स्टोर कर रहे हैं
-            filtered_buses.append(bus)
-
-    # यह 'for' लूप के बिल्कुल बाहर (पीछे) आ गया है
     return render_template(
         "result.html",
         filtered_buses=filtered_buses,
@@ -226,13 +131,16 @@ def search():
         destination=destination
     )
 
-
-@app.route("/route/<int:bus_index>")
-def route_details(bus_index):
-    global buses
-    bus = buses[bus_index]
+@app.route("/route/<int:bus_id>")
+def route_details(bus_id):
+    conn = get_db_connection()
+    bus = conn.execute("SELECT * FROM buses WHERE id = ?", (bus_id,)).fetchone()
+    conn.close()
+    
+    if bus is None:
+        return "Bus Route Not Found!", 404
+        
     return render_template("route.html", bus=bus)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
