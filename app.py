@@ -60,7 +60,7 @@ def init_db_automatically():
 init_db_automatically()
 
 
-# --- URL ROUTES ---
+# --- USER URL ROUTES ---
 
 @app.route("/")
 def home():
@@ -73,7 +73,41 @@ def about():
 @app.route("/timetable")
 def timetable():
     return render_template("timetable.html")
+
+@app.route("/search", methods=["POST"])
+def search():
+    boarding = request.form["boarding"].strip()
+    destination = request.form["destination"].strip()
+
+    conn = get_db_connection()
+    # LIKE ऑपरेटर ताकि छोटा-बड़ा अक्षर (Case Insensitive) सब मैच हो जाए
+    filtered_buses = conn.execute("""
+        SELECT * FROM buses 
+        WHERE boarding LIKE ? AND destination LIKE ?
+    """, (f"%{boarding}%", f"%{destination}%")).fetchall()
+    conn.close()
+
+    return render_template(
+        "result.html",
+        filtered_buses=filtered_buses,
+        boarding=boarding,
+        destination=destination
+    )
+
+@app.route("/route/<int:bus_id>")
+def route_details(bus_id):
+    conn = get_db_connection()
+    bus = conn.execute("SELECT * FROM buses WHERE id = ?", (bus_id,)).fetchone()
+    conn.close()
     
+    if bus is None:
+        return "Bus Route Not Found!", 404
+        
+    return render_template("route.html", bus=bus)
+
+
+# --- ADMIN URL ROUTES ---
+
 @app.route("/admin")
 def admin():
     return render_template("admin_login.html")
@@ -111,36 +145,20 @@ def save_bus():
     conn.close()
     return redirect(url_for("dashboard"))
 
-@app.route("/search", methods=["POST"])
-def search():
-    boarding = request.form["boarding"].strip()
-    destination = request.form["destination"].strip()
-
+# 🌟 1. सभी बसों को एक साथ देखने के लिए रूट
+@app.route("/view-buses")
+def view_buses():
     conn = get_db_connection()
-    # LIKE ऑपरेटर ताकि छोटा-बड़ा अक्षर (Case Insensitive) सब मैच हो जाए
-    filtered_buses = conn.execute("""
-        SELECT * FROM buses 
-        WHERE boarding LIKE ? AND destination LIKE ?
-    """, (f"%{boarding}%", f"%{destination}%")).fetchall()
+    all_buses = conn.execute("SELECT * FROM buses").fetchall()
     conn.close()
+    return render_template("view_buses.html", buses=all_buses)
 
-    return render_template(
-        "result.html",
-        filtered_buses=filtered_buses,
-        boarding=boarding,
-        destination=destination
-    )
+# 🌟 2. लॉगआउट करके वापस लॉगिन पेज पर भेजने के लिए रूट
+@app.route("/logout")
+def logout():
+    # यहाँ आप चाहें तो सेशन क्लियर कर सकते हैं, अभी के लिए सीधे लॉगिन पर भेज रहे हैं
+    return redirect(url_for("admin"))
 
-@app.route("/route/<int:bus_id>")
-def route_details(bus_id):
-    conn = get_db_connection()
-    bus = conn.execute("SELECT * FROM buses WHERE id = ?", (bus_id,)).fetchone()
-    conn.close()
-    
-    if bus is None:
-        return "Bus Route Not Found!", 404
-        
-    return render_template("route.html", bus=bus)
 
 if __name__ == "__main__":
     app.run(debug=True)
