@@ -208,23 +208,31 @@ def search():
             ]
         }
     ]
+    # ध्यान रखें: यह पूरा कोड आपके 'def search():' फंक्शन के अंदर होना चाहिए
+    
     filtered_buses = []
-    for bus in buses:
-        if bus["boarding"].lower() == boarding and bus["destination"].lower() == destination:
+
+    for index, bus in enumerate(buses):
+        # .lower() कंपैरिजन सही रखने के लिए (दोनों तरफ .lower() लगाया है)
+        if bus["boarding"].lower() == boarding.lower() and bus["destination"].lower() == destination.lower():
+            bus["index"] = index  # यहाँ हम बस के अंदर उसका सही ओरिजinal इंडेक्स स्टोर कर रहे हैं
             filtered_buses.append(bus)
 
+    # यह 'for' लूप के बिल्कुल बाहर (पीछे) आ गया है
     return render_template(
         "result.html",
+        filtered_buses=filtered_buses,
         boarding=boarding,
-        destination=destination,
-        buses=filtered_buses
+        destination=destination
     )
-    
+
+
 @app.route("/route/<int:bus_index>")
 def route_details(bus_index):
     global buses
     bus = buses[bus_index]
     return render_template("route.html", bus=bus)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
