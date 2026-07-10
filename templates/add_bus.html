@@ -7,23 +7,18 @@
 <body>
 
 <div class="card">
+    <h1>➕ Add New Bus</h1>
 
-<h1>➕ Add New Bus</h1>
+    <form action="/save-bus" method="POST">
+        <input type="text" name="boarding" placeholder="Boarding (e.g. Rampura)" required>
+        <input type="text" name="destination" placeholder="Destination (e.g. Bahal)" required>
+        <input type="text" name="time" placeholder="Time (e.g. 09:00 AM)" required>
+        <input type="text" name="bus" placeholder="Bus Name" required>
+        
+        <input type="text" name="route" placeholder="Complete Route Stops (e.g. Rampura → Gugalwa → Bahal)" required>
 
-<form action="/save-bus" method="POST">
-
-<input type="text" name="boarding" placeholder="Boarding" required>
-
-<input type="text" name="destination" placeholder="Destination" required>
-
-<input type="text" name="time" placeholder="Time" required>
-
-<input type="text" name="bus" placeholder="Bus Name" required>
-
-<button type="submit">Save Bus</button>
-
-</form>
-
+        <button type="submit">Save Bus</button>
+    </form>
 </div>
 
 </body>

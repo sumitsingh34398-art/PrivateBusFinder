@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Buses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .container { text-align: center; margin-top: 20px; font-family: Arial, sans-serif; }
+        .search-input { width: 90%; padding: 12px; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 6px; }
+        .admin-table { width: 95%; margin: 0 auto; border-collapse: collapse; background: white; }
+        .admin-table th, .admin-table td { padding: 10px; border: 1px solid #ddd; text-align: left; font-size: 14px; }
+        .admin-table th { background-color: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚌 All Registered Buses</h1>
+        <input type="text" id="busSearchInput" class="search-input" onkeyup="filterBuses()" placeholder="🔍 सर्च करें...">
+
+        <table class="admin-table" id="busesTable">
+            <thead>
+                <tr>
+                    <th>Bus</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bus in buses %}
+                <tr>
+                    <td>{{ bus.bus_name }}</td>
+                    <td>{{ bus.boarding }}</td>
+                    <td>{{ bus.destination }}</td>
+                    <td>
+                        <a href="/delete-bus/{{ bus.id }}" onclick="return confirm('क्या आप इसे डिलीट करना चाहते हैं?')" style="color: red; font-weight: bold;">❌</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="/dashboard" style="padding: 10px 20px; background: #333; color: white; border-radius: 5px; text-decoration: none;">⬅ Back</a>
+    </div>
+
+    <script>
+    function filterBuses() {
+        var input = document.getElementById("busSearchInput").value.toLowerCase();
+        var tr = document.getElementById("busesTable").getElementsByTagName("tr");
+        for (var i = 1; i < tr.length; i++) {
+            tr[i].style.display = (tr[i].textContent.toLowerCase().indexOf(input) > -1) ? "" : "none";
+        }
+    }
+    </script>
+</body>
+</html>
