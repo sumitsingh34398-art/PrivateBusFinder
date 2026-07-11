@@ -22,6 +22,7 @@
                     <th>Bus</th>
                     <th>From</th>
                     <th>To</th>
+                    <th>Time</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                     <td>{{ bus.bus_name }}</td>
                     <td>{{ bus.boarding }}</td>
                     <td>{{ bus.destination }}</td>
+                    <td>{{ bus.time}}</td>
                     <td>
                         <a href="/delete-bus/{{ bus.id }}" onclick="return confirm('क्या आप इसे डिलीट करना चाहते हैं?')" style="color: red; font-weight: bold;">❌</a>
                     </td>

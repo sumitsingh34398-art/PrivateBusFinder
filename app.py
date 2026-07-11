@@ -100,7 +100,7 @@ def save_bus():
 @app.route("/view-buses")
 def view_buses():
     conn = get_db_connection()
-    all_buses = conn.execute("SELECT * FROM buses").fetchall()
+    all_buses = conn.execute("SELECT bus_name, from_station, to_station, time FROM buses").fetchall()
     conn.close()
     return render_template("view_buses.html", buses=all_buses)
 
