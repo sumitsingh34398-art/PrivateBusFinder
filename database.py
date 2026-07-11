@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import sqlite3
 
 # 1. डेटाबेस कनेक्शन और टेबल बनाना
@@ -44,7 +43,6 @@ if cursor.fetchone()[0] == 0:
 
 conn.close()
 print("Database Ready!")
-=======
 import sqlite3
 
 # 1. डेटाबेस कनेक्शन और टेबल बनाना
@@ -90,4 +88,3 @@ if cursor.fetchone()[0] == 0:
 
 conn.close()
 print("Database Ready!")
->>>>>>> bc563171a97602d689dd56f0426e265b233b6426

@@ -39,8 +39,6 @@ def init_db_automatically():
 
 init_db_automatically()
 
-# --- USER URL ROUTES ---
-
 @app.route("/")
 def home():
     return render_template("index.html")
