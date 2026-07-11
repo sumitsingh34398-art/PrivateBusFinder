@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
@@ -115,7 +114,6 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
-=======
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
