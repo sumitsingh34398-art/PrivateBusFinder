@@ -45,6 +45,14 @@ init_db_automatically()
 def home():
     return render_template("index.html")
 
+@app.route('/timetable')
+def timetable():
+    return render_template('timetable.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route("/search", methods=["POST"])
 def search():
     boarding = request.form["boarding"].strip()
