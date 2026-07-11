@@ -56,8 +56,7 @@ def search():
     boarding = request.form["boarding"].strip()
     destination = request.form["destination"].strip()
     conn = get_db_connection()
-    filtered_buses = conn.execute("SELECT * FROM buses WHERE boarding LIKE ? AND destination LIKE ?", 
-                                  (f"%{boarding}%", f"%{destination}%")).fetchall()
+    filtered_buses = conn.execute("SELECT * FROM buses WHERE boarding LIKE ? AND destination LIKE ?", ('%' + boarding + '%', '%' + destination + '%')).fetchall()
     conn.close()
     return render_template("result.html", filtered_buses=filtered_buses, boarding=boarding, destination=destination)
 
