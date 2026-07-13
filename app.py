@@ -150,9 +150,32 @@ def init_db_automatically():
     cursor.execute("SELECT COUNT(*) FROM buses")
     if cursor.fetchone()[0] == 0:
         default_buses = [
-            ("Rampura", "Pilani", "Billu Bus Travels", "08:30 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani"),
-            ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura → Beri → Bangothari → Hemeenpur → Bishanpura → Pilani")
-        ]
+    ("Rampura", "Pilani", "Billu Bus Travels", "08:30 AM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Rampura", "Pilani", "Pawan Bus Travels", "10:00 AM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Rampura", "Pilani", "Road King Bus Travels", "11:15 AM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Rampura", "Pilani", "Mini Bus Travels", "11:45 AM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Rampura", "Pilani", "Billu Bus Travels", "12:45 PM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Rampura", "Pilani", "Confirm Nhi Bus Travels", "02:30 PM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Rampura", "Pilani", "Billu Bus Travels", "04:30 PM", "Rampura -> Beri -> Bangoth -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Pilani", "Rampura", "Mini Bus Travels", "08:00 AM", "Pilani -> Bishanpura -> Hemeenpur -> Bangoth -> Beri -> Rampura"),
+    ("Pilani", "Rampura", "Billu Bus Travels", "10:15 AM", "Pilani -> Bishanpura -> Hemeenpur -> Bangoth -> Beri -> Rampura"),
+    # ("Pilani", "Rampura", "Road King Bus Travels", "11:15 AM", "Pilani -> Bishanpura -> Hemeenpur -> Bangoth -> Beri -> Rampura"),
+    # # ("Pilani", "Rampura", "Mini Bus Travels", "11:45 AM", "Pilani -> Bishanpura -> Hemeenpur -> Bangoth -> Beri -> Rampura"),
+    # # ("Pilani", "Rampura", "Billu Bus Travels", "12:45 PM", "Pilani -> Bishanpura -> Hemeenpur -> Bangoth -> Beri -> Rampura")
+    ("Rampura", "Bahal", "Mini Bus Travels", "09:00 AM", "Rampura -> Gugalwa -> Sorda Jadid -> Sorda Kadim -> Bahal"),
+    ("Bahal", "Rampura", "Mini Bus Travels", "10:50 AM", "Bahal -> Sorda Kadim -> Sorda Jadid -> Gugalwa -> Rampura"),
+    ("Bahal", "Pilani", "Mini Bus Travels", "10:50 AM", "Bahal -> Sorda Kadim -> Sorda Jadid -> Gugalwa -> Rampura -> Beri -> Bangothari -> Hemeenpur -> Bishanpura -> Pilani"),
+    # ("Bahal", "Pilani", "Bus Name", "Time", "Bahal -> Sorda Kadim -> Sorda Jadid -> Gugalwa -> Rampura -> Beri -> Bangothari -> Hemeenpur -> Bishanpura -> Pilani"),
+    # # ("Bahal", "Pilani", "Bus Name", "Time", "Bahal -> Sorda Kadim -> Sorda Jadid -> Gugalwa -> Rampura -> Beri -> Bangothari -> Hemeenpur -> Bishanpura -> Pilani"),
+    ("Pilani", "Bahal", "Mini Bus Travels", "08:00 AM", "Pilani -> Bishanpura -> Hemeenpur -> Bangothari -> Beri ->   Rampura -> Gugalwa -> Sorda Jadid -> Sorda Kadim -> Bahal"),
+    # Rajgarh to Hisar (3 baar sidha, 3 baar ulta)
+    ("Rajgarh", "Hisar", "Bus trip 1:Bus travels", "07:15 AM", "Rajgarh -> Ludi -> Lutana -> Laseri -> Sherpura -> Juppa -> Motipura -> Bhudseli -> Lilas -> Gandawass -> Siwani -> Barwa -> Choudhary Was -> Panihar -> Bheria -> Muklan -> Gangwa -> Hisar"),
+    ("Rajgarh", "Hisar", "Private bus", "08:00 AM", "Rajgarh -> Ludi -> Lutana -> Laseri -> Sherpura -> Juppa -> Motipura -> Bhudseli -> Lilas -> Gandawass -> Siwani -> Barwa -> Choudhary Was -> Panihar -> Bheria -> Muklan -> Gangwa -> Hisar"),
+    ("Rajgarh", "Hisar", "Bus trip 2:Bus travels", "08:10 AM", "Rajgarh -> Ludi -> Lutana -> Laseri -> Sherpura -> Juppa -> Motipura -> Bhudseli -> Lilas -> Gandawass -> Siwani -> Barwa -> Choudhary Was -> Panihar -> Bheria -> Muklan -> Gangwa -> Hisar"),
+    # ("Hisar", "Rajgarh", "Bus Name", "Time", "Hisar -> Gangwa -> Muklan -> Bheria -> Panihar -> Choudhary Was -> Barwa -> Siwani -> Gandawass -> Lilas -> Bhudseli -> Motipura -> Juppa -> Sherpura -> Laseri -> Lutana -> Ludi -> Rajgarh"),
+    # # # ("Hisar", "Rajgarh", "Bus Name", "Time", "Hisar -> Gangwa -> Muklan -> Bheria -> Panihar -> Choudhary Was -> Barwa -> Siwani -> Gandawass -> Lilas -> Bhudseli -> Motipura -> Juppa -> Sherpura -> Laseri -> Lutana -> Ludi -> Rajgarh"),
+    # # # ("Hisar", "Rajgarh", "Bus Name", "Time", "Hisar -> Gangwa -> Muklan -> Bheria -> Panihar -> Choudhary Was -> Barwa -> Siwani -> Gandawass -> Lilas -> Bhudseli -> Motipura -> Juppa -> Sherpura -> Laseri -> Lutana -> Ludi -> Rajgarh")
+]
         cursor.executemany("INSERT INTO buses (boarding, destination, bus_name, departure_time, route) VALUES (?, ?, ?, ?, ?)", default_buses)
         conn.commit()
     conn.close()
