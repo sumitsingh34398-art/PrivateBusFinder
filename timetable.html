@@ -34,6 +34,9 @@
             padding: 20px 60px;
             background: #ffffff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .brand {
             display: flex;
@@ -151,6 +154,10 @@
             background: #fafafa;
             outline: none;
         }
+        .search-field:focus {
+            border-color: #0d47a1;
+            background: #fff;
+        }
         .search-btn {
             background: #0d47a1;
             color: white;
@@ -235,6 +242,10 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: 0.2s;
+        }
+        .filter-action-btn:hover {
+            background: #f1f5f9;
         }
 
         /* Timetable Table Styling */
@@ -367,10 +378,10 @@
                     <label>Journey Date</label>
                     <div class="search-input-wrap">
                         <i class="far fa-calendar-alt"></i>
-                        <input type="text" class="search-field" value="23-Jul-2026">
+                        <input type="text" id="journey-date" class="search-field" value="23-Jul-2026">
                     </div>
                 </div>
-                <button class="search-btn" onclick="filterBuses()">
+                <button class="search-btn" onclick="searchBuses()">
                     <i class="fas fa-search"></i> Search Buses
                 </button>
             </div>
@@ -473,15 +484,14 @@
     </div>
 
     <script>
-        function filterBuses() {
-            const fromVal = document.getElementById('from-station').value.trim();
-            const toVal = document.getElementById('to-station').value.trim();
+        function searchBuses() {
+            const boarding = document.getElementById('from-station').value.trim();
+            const destination = document.getElementById('to-station').value.trim();
 
-            if (fromVal === "" || toVal === "") {
+            if (boarding === "" || destination === "") {
                 alert("Please enter both From and To stations!");
             } else {
-                // Jaise index.html mein tha, waise hi route.html par redirect karega query parameters ke sath
-                window.location.href = `route.html?from=${encodeURIComponent(fromVal)}&to=${encodeURIComponent(toVal)}`;
+                window.location.href = `route.html?from=${encodeURIComponent(boarding)}&to=${encodeURIComponent(destination)}`;
             }
         }
     </script>
