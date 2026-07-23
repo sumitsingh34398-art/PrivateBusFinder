@@ -135,7 +135,7 @@
             { time: "13:30 PM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
             { time: "15:00 PM", from: "Tosham", to: "Bahal", via: "—", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
 
-            // Rampura to Pilani Buses (Newly Added)
+            // Rampura to Pilani Buses
             { time: "08:30 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" },
             { time: "10:00 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Pawan Bus Travels", days: "All Days" },
             { time: "11:15 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "No Name Bus Travels", days: "All Days" },
@@ -144,12 +144,25 @@
             { time: "02:30 PM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Confirm Nhi Bus Travels", days: "All Days" },
             { time: "04:30 PM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" },
 
-            // Rampura to Bahal Buses (Newly Added)
+            // Rampura to Bahal Buses
             { time: "09:00 AM", from: "Rampura", to: "Bahal", via: "Gugalwa, Sorda Jadid, Sorda Kadim", type: "Ordinary", operator: "Mini Bus Travels", days: "All Days" },
 
-            // Pilani to Rampura Buses (Newly Added)
+            // Pilani to Rampura Buses
             { time: "08:00 AM", from: "Pilani", to: "Rampura", via: "Bishanpura, Hemeenpur, Bangothari, Beri", type: "Ordinary", operator: "Mini Bus Travels", days: "All Days" },
-            { time: "10:15 AM", from: "Pilani", to: "Rampura", via: "Bishanpura, Hemeenpur, Bangothari, Beri", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" }
+            { time: "10:15 AM", from: "Pilani", to: "Rampura", via: "Bishanpura, Hemeenpur, Bangothari, Beri", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" },
+
+            // Bahal to Tosham Buses (Newly Added via Screenshots)
+            { time: "07:10 AM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "07:20 AM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "08:44 AM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "09:50 AM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "10:30 AM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "11:15 AM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "12:00 PM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "12:20 PM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "01:30 PM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "02:30 PM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "03:00 PM", from: "Bahal", to: "Tosham", via: "Jhanwari", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" }
         ];
 
         function renderTable(buses, routeText) {
@@ -174,7 +187,7 @@
                     </tr>`;
                 });
             } else {
-                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b; padding: 30px;">No buses found matching your search. Please try searching other routes like 'Rampura' to 'Pilani'.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b; padding: 30px;">No buses found matching your search. Please try searching other routes like 'Bahal' to 'Tosham'.</td></tr>`;
             }
         }
 
