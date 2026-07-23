@@ -10,7 +10,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: #f4f6f9; color: #333; }
         
-        /* Navbar */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
         .brand { display: flex; align-items: center; gap: 12px; }
         .brand-logo { background: #0d47a1; color: white; font-weight: 700; font-size: 20px; padding: 10px 14px; border-radius: 8px; }
@@ -20,7 +19,6 @@
         .nav-links a { text-decoration: none; color: #222; font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: #0d47a1; }
 
-        /* Premium Header Banner with Roadways Bus Background */
         .page-header {
             background: linear-gradient(rgba(11, 25, 44, 0.8), rgba(11, 25, 44, 0.85)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             padding: 50px 20px;
@@ -32,7 +30,6 @@
 
         .container { max-width: 1150px; margin: -30px auto 50px auto; padding: 0 20px; position: relative; z-index: 10; }
         
-        /* Route Info & Filter Card */
         .route-info-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 25px 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .route-title { font-size: 22px; font-weight: 700; color: #0f172a; }
         
@@ -42,7 +39,6 @@
         .search-controls button { background: #0d47a1; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
         .search-controls button:hover { background: #1565c0; }
 
-        /* Professional Table Styling */
         .table-responsive { background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow-x: auto; }
         .timetable-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 800px; }
         .timetable-table th { background: #0b192c; color: white; padding: 18px 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -72,7 +68,6 @@
         </div>
     </div>
 
-    <!-- Professional Banner with Roadways Bus Background -->
     <div class="page-header">
         <h2>Live Bus Timetable & Schedule</h2>
         <p>Accurate and verified timing records for Hisar, Tosham and Bahal routes</p>
@@ -116,7 +111,6 @@
     </div>
 
     <script>
-        // Screenshots ke anusaar saari exact buses ka database
         const allBuses = [
             // Hisar to Tosham Buses
             { time: "06:00 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
