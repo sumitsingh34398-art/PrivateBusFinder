@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - All Rounder Private Bus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #f4f6f9; color: #333; width: 100%; overflow-x: hidden; }
+        .container { width: 100%; max-width: 100%; margin: 0; background: #ffffff; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-logo { background: #0d47a1; color: white; font-weight: 700; font-size: 20px; padding: 10px 14px; border-radius: 8px; }
+        .brand-text h1 { font-size: 20px; font-weight: 700; color: #111; }
+        .brand-text p { font-size: 13px; color: #555; }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #222; font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: color 0.2s; padding-bottom: 4px; }
+        .nav-links a:hover, .nav-links a.active { color: #0d47a1; border-bottom: 2px solid #0d47a1; }
+        .nav-links a i { color: #0d47a1; }
+        .hero-section { position: relative; background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('images/1000134095.png') no-repeat 85% center / cover; min-height: 480px; padding: 60px; display: flex; flex-direction: column; justify-content: center; color: white; }
+        .hero-content h2 { font-size: 48px; font-weight: 700; line-height: 1.2; }
+        .hero-content h2 span { color: #2979ff; }
+        .hero-features { margin-top: 15px; font-size: 18px; font-weight: 500; color: #e0e0e0; }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(13, 71, 161, 0.9); padding: 10px 20px; border-radius: 30px; margin-top: 25px; font-size: 15px; }
+        .about-cards-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 40px 60px; background: #fff; }
+        .about-card-box { background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 30px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .feature-icon { width: 70px; height: 70px; background: #e3f2fd; color: #1565c0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; font-size: 24px; }
+        .about-card-box h3 { font-size: 17px; font-weight: 700; color: #111; margin-bottom: 10px; }
+        .about-card-box p { font-size: 13px; color: #666; line-height: 1.5; }
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); background: #ffffff; margin: 0 60px; padding: 30px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; text-align: center; }
+        .stat-item { border-right: 1px solid #eee; padding: 0 15px; }
+        .stat-item:last-child { border-right: none; }
+        .stat-item i { color: #1565c0; font-size: 28px; margin-bottom: 10px; }
+        .stat-number { font-size: 26px; font-weight: 700; color: #111; margin-bottom: 5px; }
+        .stat-label { font-size: 14px; color: #555; font-weight: 500; }
+        .mission-why-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 60px; background: #fff; align-items: center; }
+        .mission-box h2, .why-box h2 { font-size: 26px; font-weight: 700; color: #111; margin-bottom: 20px; }
+        .mission-box p { font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 25px; }
+        .quote-box { background: #f8fafc; border-left: 4px solid #1565c0; padding: 20px; border-radius: 8px; font-style: italic; color: #333; font-size: 14px; }
+        .why-list { list-style: none; display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .why-list li { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; color: #333; }
+        .why-list li i { color: #1565c0; font-size: 16px; }
+        .bus-interior-img { width: 100%; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover; max-height: 320px; }
+        .footer { background: #0b192c; color: white; padding: 40px 60px; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 30px; font-size: 14px; }
+        .footer-brand-col { display: flex; align-items: flex-start; gap: 15px; }
+        .footer-col h4 { font-size: 16px; margin-bottom: 15px; font-weight: 600; }
+        .footer-links-list, .footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links-list li a { color: #b0bec5; text-decoration: none; cursor: pointer; }
+        .footer-links-list li a:hover { color: #fff; }
+        .footer-contact-list { color: #b0bec5; }
+        .footer-contact-list li { display: flex; align-items: center; gap: 10px; }
+        .social-icons { display: flex; gap: 12px; margin-top: 15px; }
+        .social-icons a { width: 36px; height: 36px; background: rgba(255,255,255,0.1); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+        .social-icons a:hover { background: #1565c0; }
+        .footer-bottom { background: #08121f; color: #8a9ba8; text-align: center; padding: 15px; font-size: 13px; }
+        @media (max-width: 900px) {
+            .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .nav-links { gap: 20px; }
+            .hero-section { padding: 30px 20px; min-height: 380px; background-position: 75% center; }
+            .hero-content h2 { font-size: 32px; }
+            .about-cards-row, .stats-row { grid-template-columns: 1fr 1fr; padding: 30px 20px; margin: 0; }
+            .mission-why-container { grid-template-columns: 1fr; padding: 30px 20px; }
+            .footer { grid-template-columns: 1fr; padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div class="brand">
+                <div class="brand-logo">AR</div>
+                <div class="brand-text">
+                    <h1>All Rounder</h1>
+                    <p>Private Bus</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="#" onclick="alert('Navigating to Timetable Section.');"><i class="fas fa-calendar-alt"></i> Timetable</a>
+                <a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+        </div>
+
+        <!-- Hero Section for About Us -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div style="font-size: 13px; font-weight: 600; letter-spacing: 1px; color: #2979ff; margin-bottom: 8px;">ABOUT US</div>
+                <h2>All Rounder<br><span>Private Bus</span></h2>
+                <div class="hero-features" style="font-size: 15px; max-width: 500px; line-height: 1.5; color: #e0e0e0; margin-top: 10px;">
+                    All Rounder Private Bus is committed to providing safe, comfortable and reliable travel experiences. We connect more cities and people with trust, punctuality and modern travel solutions.
+                </div>
+                <div class="badge">
+                    <i class="fas fa-shield-alt"></i> Safe Travel, Happy Journey
+                </div>
+            </div>
+        </div>
+
+        <!-- Four Cards Row -->
+        <div class="about-cards-row">
+            <div class="about-card-box">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Safe & Secure</h3>
+                <p>Passenger safety is our highest priority.</p>
+            </div>
+            <div class="about-card-box">
+                <div class="feature-icon"><i class="fas fa-couch"></i></div>
+                <h3>Comfortable Journey</h3>
+                <p>Spacious seating and clean buses for a pleasant ride.</p>
+            </div>
+            <div class="about-card-box">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h3>On Time Service</h3>
+                <p>We value your time and ensure punctuality.</p>
+            </div>
+            <div class="about-card-box">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h3>24/7 Support</h3>
+                <p>Our support team is always here to help you.</p>
+            </div>
+        </div>
+
+        <!-- Statistics Row -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <i class="fas fa-bus"></i>
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Buses</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-route"></i>
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Routes</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years of Service</div>
+            </div>
+        </div>
+
+        <!-- Mission and Why Choose Us Section -->
+        <div class="mission-why-container">
+            <div class="mission-box">
+                <h2>Our Mission</h2>
+                <p>To deliver reliable, comfortable and affordable bus services while maintaining the highest standards of safety and customer satisfaction.</p>
+                <div class="quote-box">
+                    "Your journey is our responsibility."<br>
+                    <span style="font-weight: 600; font-style: normal; display: block; margin-top: 5px;">– All Rounder Private Bus</span>
+                </div>
+            </div>
+            <div class="why-box">
+                <h2>Why Choose Us?</h2>
+                <ul class="why-list">
+                    <li><i class="fas fa-check-circle"></i> Modern fleet with premium buses</li>
+                    <li><i class="fas fa-check-circle"></i> Experienced & professional drivers</li>
+                    <li><i class="fas fa-check-circle"></i> Affordable fares with best service</li>
+                    <li><i class="fas fa-check-circle"></i> Multiple routes & easy booking</li>
+                    <li><i class="fas fa-check-circle"></i> Clean, hygienic and well-maintained buses</li>
+                </ul>
+                <img src="images/1000134095.png" alt="Bus Interior" class="bus-interior-img">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand-col">
+                <i class="fas fa-bus" style="font-size: 32px; color: #2979ff;"></i>
+                <div>
+                    <strong>All Rounder Private Bus</strong><br>
+                    <span style="font-size: 13px; color: #b0bec5; margin-top: 5px; display: block;">Your Journey, Our Responsibility.</span>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#" onclick="alert('Navigating to Timetable Section.');">Timetable</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-contact-list">
+                    <li><i class="fas fa-phone-alt"></i> +91 12345 67890</li>
+                    <li><i class="fas fa-envelope"></i> support@allrounderbus.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> India</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 All Rounder Private Bus. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
