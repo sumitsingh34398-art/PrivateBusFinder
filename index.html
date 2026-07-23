@@ -72,18 +72,20 @@
             gap: 8px;
             cursor: pointer;
             transition: color 0.2s;
+            padding-bottom: 4px;
         }
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: #0d47a1;
+            border-bottom: 2px solid #0d47a1;
         }
         .nav-links a i {
             color: #0d47a1;
         }
 
-        /* Hero Section with Random Bus Background Aligned to the Right */
+        /* Hero Section with Premium Clean Bus Background Aligned to the Right */
         .hero-section {
             position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80') no-repeat 85% center / cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1600&q=80') no-repeat 90% center / cover;
             min-height: 480px;
             padding: 60px;
             display: flex;
@@ -303,9 +305,9 @@
                 </div>
             </div>
             <div class="nav-links">
-                <a href="#" onclick="navigatePage('Home')"><i class="fas fa-home"></i> Home</a>
-                <a href="#" onclick="navigatePage('Timetable')"><i class="fas fa-calendar-alt"></i> Timetable</a>
-                <a href="#" onclick="navigatePage('About')"><i class="fas fa-info-circle"></i> About</a>
+                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="timetable.html"><i class="fas fa-calendar-alt"></i> Timetable</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
             </div>
         </div>
 
@@ -414,11 +416,6 @@
         // Run instantly and update every second
         updateClock();
         setInterval(updateClock, 1000);
-
-        // Clickable navigation handler
-        function navigatePage(pageName) {
-            alert("Navigating to " + pageName + " Section.");
-        }
 
         // Search Bus Timetable action handler on Submit Query click
         function searchBuses() {
