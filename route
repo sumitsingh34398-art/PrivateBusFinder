@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Routes & Timetable - All Rounder Private Bus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #f4f6f9; color: #333; }
+        
+        /* Navbar */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-logo { background: #0d47a1; color: white; font-weight: 700; font-size: 20px; padding: 10px 14px; border-radius: 8px; }
+        .brand-text h1 { font-size: 20px; font-weight: 700; color: #111; }
+        .brand-text p { font-size: 13px; color: #555; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #222; font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #0d47a1; }
+
+        /* Premium Header Banner with Roadways Bus Background */
+        .page-header {
+            background: linear-gradient(rgba(11, 25, 44, 0.8), rgba(11, 25, 44, 0.85)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+        }
+        .page-header h2 { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+        .page-header p { font-size: 15px; color: #b0bec5; }
+
+        .container { max-width: 1150px; margin: -30px auto 50px auto; padding: 0 20px; position: relative; z-index: 10; }
+        
+        /* Route Info & Filter Card */
+        .route-info-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 25px 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .route-title { font-size: 22px; font-weight: 700; color: #0f172a; }
+        
+        .search-controls { display: flex; gap: 12px; flex-wrap: wrap; }
+        .search-controls input { padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; width: 180px; background: #f8fafc; }
+        .search-controls input:focus { border-color: #0d47a1; background: #fff; }
+        .search-controls button { background: #0d47a1; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .search-controls button:hover { background: #1565c0; }
+
+        /* Professional Table Styling */
+        .table-responsive { background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow-x: auto; }
+        .timetable-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 800px; }
+        .timetable-table th { background: #0b192c; color: white; padding: 18px 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .timetable-table td { padding: 18px 20px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #334155; }
+        .timetable-table tr:hover { background: #f8fafc; }
+
+        .badge-type { background: #d1fae5; color: #065f46; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .badge-days { background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; display: inline-block; }
+
+        .footer { background: #0b192c; color: white; padding: 30px 60px; text-align: center; margin-top: 60px; font-size: 14px; }
+        
+        @media(max-width: 768px) { .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; } .route-info-card { flex-direction: column; align-items: stretch; } .search-controls input { width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand">
+            <div class="brand-logo">AR</div>
+            <div class="brand-text">
+                <h1>All Rounder</h1>
+                <p>Private Bus</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="route.html" class="active"><i class="fas fa-route"></i> All Buses</a>
+        </div>
+    </div>
+
+    <!-- Professional Banner with Roadways Bus Background -->
+    <div class="page-header">
+        <h2>Live Bus Timetable & Schedule</h2>
+        <p>Accurate and verified timing records for Hisar, Tosham and Bahal routes</p>
+    </div>
+
+    <div class="container">
+        <div class="route-info-card">
+            <div>
+                <div class="route-title" id="display-route-heading">Complete Bus Directory</div>
+                <p style="color: #64748b; font-size: 14px; margin-top: 4px;" id="result-count">Loading available buses...</p>
+            </div>
+            <div class="search-controls">
+                <input type="text" id="filter-from" placeholder="From Station">
+                <input type="text" id="filter-to" placeholder="To Station">
+                <button onclick="applyManualFilter()"><i class="fas fa-search"></i> Filter Route</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="timetable-table">
+                <thead>
+                    <tr>
+                        <th>Departure Time</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Via (Stops)</th>
+                        <th>Bus Type</th>
+                        <th>Operator</th>
+                        <th>Days</th>
+                    </tr>
+                </thead>
+                <tbody id="route-table-body">
+                    <!-- Dynamic Data -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 All Rounder Private Bus. All rights reserved.
+    </div>
+
+    <script>
+        // Screenshots ke anusaar saari exact buses ka database
+        const allBuses = [
+            // Hisar to Tosham Buses
+            { time: "06:00 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "06:20 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "06:40 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "07:15 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "PVT", days: "All Days" },
+            { time: "07:30 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "PVT", days: "All Days" },
+            { time: "07:45 AM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "06:15 PM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "06:30 PM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "PVT", days: "All Days" },
+            { time: "06:45 PM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "07:00 PM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "07:15 PM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+            { time: "08:00 PM", from: "HISAR", to: "TOSHAM", via: "Nalwa", type: "Ordinary", operator: "HR", days: "All Days" },
+
+            // Tosham to Bahal Buses
+            { time: "05:40 AM", from: "Tosham", to: "Bahal", via: "—", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "07:00 AM", from: "Tosham", to: "Bahal", via: "Bhariwas (khava)", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "07:30 AM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "11:30 AM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "13:20 PM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "13:30 PM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+            { time: "15:00 PM", from: "Tosham", to: "Bahal", via: "—", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" }
+        ];
+
+        function renderTable(buses, routeText) {
+            const tableBody = document.getElementById('route-table-body');
+            const heading = document.getElementById('display-route-heading');
+            const countText = document.getElementById('result-count');
+            
+            heading.innerText = routeText ? `Route Schedule: ${routeText}` : "Complete Bus Directory";
+            countText.innerText = `Showing ${buses.length} available bus(es)`;
+            tableBody.innerHTML = "";
+
+            if (buses.length > 0) {
+                buses.forEach(bus => {
+                    tableBody.innerHTML += `<tr>
+                        <td><span style="color: #0d47a1; font-weight: 700;"><i class="far fa-clock"></i> ${bus.time}</span></td>
+                        <td><strong>${bus.from}</strong></td>
+                        <td><strong>${bus.to}</strong></td>
+                        <td>${bus.via}</td>
+                        <td><span class="badge-type">${bus.type}</span></td>
+                        <td><strong>${bus.operator}</strong></td>
+                        <td><span class="badge-days">${bus.days}</span></td>
+                    </tr>`;
+                });
+            } else {
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b; padding: 30px;">No buses found matching your search. Please try searching 'Hisar' to 'Tosham' or 'Tosham' to 'Bahal'.</td></tr>`;
+            }
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromParam = urlParams.get('from');
+            const toParam = urlParams.get('to');
+
+            if (fromParam && toParam) {
+                document.getElementById('filter-from').value = fromParam;
+                document.getElementById('filter-to').value = toParam;
+
+                const filtered = allBuses.filter(bus => 
+                    bus.from.toLowerCase().includes(fromParam.toLowerCase()) && 
+                    bus.to.toLowerCase().includes(toParam.toLowerCase())
+                );
+                renderTable(filtered, `${fromParam} ➔ ${toParam}`);
+            } else {
+                renderTable(allBuses, "");
+            }
+        };
+
+        function applyManualFilter() {
+            const fInput = document.getElementById('filter-from').value.trim().toLowerCase();
+            const tInput = document.getElementById('filter-to').value.trim().toLowerCase();
+
+            const filtered = allBuses.filter(bus => {
+                let matchFrom = fInput === "" || bus.from.toLowerCase().includes(fInput);
+                let matchTo = tInput === "" || bus.to.toLowerCase().includes(tInput);
+                return matchFrom && matchTo;
+            });
+
+            renderTable(filtered, fInput && tInput ? `${document.getElementById('filter-from').value} ➔ ${document.getElementById('filter-to').value}` : "");
+        }
+    </script>
+</body>
+</html>
