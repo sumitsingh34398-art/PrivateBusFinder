@@ -287,78 +287,6 @@
             background: #1565c0;
         }
 
-        /* Bottom Grid: Route Stops & Note */
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-        }
-        .card-box {
-            background: #ffffff;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-        .card-box h4 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 20px;
-        }
-        .timeline-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-top: 30px;
-            padding: 0 10px;
-        }
-        .timeline-steps::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 20px;
-            right: 20px;
-            height: 3px;
-            background: #0d47a1;
-            z-index: 1;
-        }
-        .step {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-        .step-dot {
-            width: 18px;
-            height: 18px;
-            background: #0d47a1;
-            border: 3px solid #fff;
-            border-radius: 50%;
-            margin: 0 auto 8px auto;
-            box-shadow: 0 0 0 2px #0d47a1;
-        }
-        .step-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
-        }
-        .note-box {
-            background: #f0f4f8;
-            border-left: 4px solid #0d47a1;
-            padding: 15px;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #475569;
-            line-height: 1.5;
-        }
-        .note-box strong {
-            color: #1e293b;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 5px;
-        }
-
         /* Footer */
         .footer {
             background: #0b192c;
@@ -384,7 +312,6 @@
         /* Responsive */
         @media(max-width: 900px) {
             .search-card { grid-template-columns: 1fr; }
-            .bottom-grid { grid-template-columns: 1fr; }
             .route-stats { gap: 20px; }
             .filter-action-btn { margin-left: 0; }
             .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
@@ -426,14 +353,14 @@
                     <label>From</label>
                     <div class="search-input-wrap">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" class="search-field" value="Hisar">
+                        <input type="text" id="from-station" class="search-field" value="Hisar">
                     </div>
                 </div>
                 <div class="search-box-group">
                     <label>To</label>
                     <div class="search-input-wrap">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" class="search-field" value="Mundhal">
+                        <input type="text" id="to-station" class="search-field" value="Tosham">
                     </div>
                 </div>
                 <div class="search-box-group">
@@ -443,7 +370,7 @@
                         <input type="text" class="search-field" value="23-Jul-2026">
                     </div>
                 </div>
-                <button class="search-btn" onclick="alert('Timetable filtered successfully!')">
+                <button class="search-btn" onclick="filterBuses()">
                     <i class="fas fa-search"></i> Search Buses
                 </button>
             </div>
@@ -452,31 +379,24 @@
         <!-- Main Timetable Content -->
         <div class="timetable-wrapper">
             <div class="route-info-card">
-                <div class="route-title">Route: Hisar &rarr; Mundhal</div>
+                <div class="route-title">Route Schedule & Directory</div>
                 <div class="route-stats">
                     <div class="stat-item">
                         <div class="stat-icon"><i class="fas fa-bus"></i></div>
                         <div class="stat-text">
-                            <span>Total Buses Found</span>
-                            <strong>8</strong>
+                            <span>Service Status</span>
+                            <strong>Active & Verified</strong>
                         </div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-icon"><i class="fas fa-route"></i></div>
                         <div class="stat-text">
-                            <span>Journey Distance</span>
-                            <strong>42 KM</strong>
+                            <span>Operators</span>
+                            <strong>HR / Private</strong>
                         </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-icon"><i class="far fa-clock"></i></div>
-                        <div class="stat-text">
-                            <span>Approx. Journey Time</span>
-                            <strong>1h 15m</strong>
-                        </div>
-                    </div>
-                    <button class="filter-action-btn">
-                        <i class="fas fa-sliders-h"></i> Filter / Sort
+                    <button class="filter-action-btn" onclick="window.location.href='route.html'">
+                        <i class="fas fa-list"></i> View All Routes
                     </button>
                 </div>
             </div>
@@ -486,143 +406,54 @@
                 <table class="timetable-table">
                     <thead>
                         <tr>
-                            <th>Bus No.</th>
+                            <th>Departure Time</th>
+                            <th>From Station</th>
+                            <th>To Station</th>
+                            <th>Via / Stops</th>
                             <th>Bus Type</th>
-                            <th>Departure (Hisar)</th>
-                            <th>Via (Major Stops)</th>
-                            <th>Arrival (Mundhal)</th>
-                            <th>Duration</th>
-                            <th>Fare</th>
+                            <th>Operator</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>AR-101</strong></td>
-                            <td>AC Seater</td>
-                            <td>06:00 AM</td>
-                            <td>Hisar Bus Stand, Mayyar Toll, Hansi, Garhi, Sorkhi</td>
-                            <td>07:15 AM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;120</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-101')">View Details</button></td>
+                            <td><strong>06:00 AM</strong></td>
+                            <td>HISAR</td>
+                            <td>TOSHAM</td>
+                            <td>Nalwa</td>
+                            <td>Ordinary</td>
+                            <td>HR</td>
+                            <td><button class="view-details-btn" onclick="window.location.href='route.html?from=Hisar&to=Tosham'">View Route</button></td>
                         </tr>
                         <tr>
-                            <td><strong>AR-102</strong></td>
-                            <td>Non-AC Seater</td>
-                            <td>07:30 AM</td>
-                            <td>Hisar Cantt, Mayyar Toll, Hansi, Garhi</td>
-                            <td>08:45 AM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;100</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-102')">View Details</button></td>
+                            <td><strong>07:15 AM</strong></td>
+                            <td>HISAR</td>
+                            <td>TOSHAM</td>
+                            <td>Nalwa</td>
+                            <td>Ordinary</td>
+                            <td>PVT</td>
+                            <td><button class="view-details-btn" onclick="window.location.href='route.html?from=Hisar&to=Tosham'">View Route</button></td>
                         </tr>
                         <tr>
-                            <td><strong>AR-103</strong></td>
-                            <td>AC Seater</td>
-                            <td>09:00 AM</td>
-                            <td>Hisar Bus Stand, Mayyar Toll, Hansi, Garhi, Sorkhi</td>
-                            <td>10:15 AM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;120</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-103')">View Details</button></td>
+                            <td><strong>05:40 AM</strong></td>
+                            <td>Tosham</td>
+                            <td>Bahal</td>
+                            <td>Direct</td>
+                            <td>Ordinary</td>
+                            <td>Sub-depot</td>
+                            <td><button class="view-details-btn" onclick="window.location.href='route.html?from=Tosham&to=Bahal'">View Route</button></td>
                         </tr>
                         <tr>
-                            <td><strong>AR-104</strong></td>
-                            <td>Non-AC Seater</td>
-                            <td>11:00 AM</td>
-                            <td>Hisar Cantt, Mayyar Toll, Hansi, Garhi</td>
-                            <td>12:15 PM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;100</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-104')">View Details</button></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AR-105</strong></td>
-                            <td>AC Sleeper</td>
-                            <td>01:00 PM</td>
-                            <td>Hisar Bus Stand, Mayyar Toll, Hansi, Garhi, Sorkhi</td>
-                            <td>02:15 PM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;150</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-105')">View Details</button></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AR-106</strong></td>
-                            <td>AC Seater</td>
-                            <td>03:00 PM</td>
-                            <td>Hisar Cantt, Mayyar Toll, Hansi, Garhi</td>
-                            <td>04:15 PM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;120</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-106')">View Details</button></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AR-107</strong></td>
-                            <td>Non-AC Seater</td>
-                            <td>05:00 PM</td>
-                            <td>Hisar Bus Stand, Mayyar Toll, Hansi, Garhi, Sorkhi</td>
-                            <td>06:15 PM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;100</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-107')">View Details</button></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AR-108</strong></td>
-                            <td>AC Sleeper</td>
-                            <td>07:00 PM</td>
-                            <td>Hisar Cantt, Mayyar Toll, Hansi, Garhi</td>
-                            <td>08:15 PM</td>
-                            <td>1h 15m</td>
-                            <td><strong>&#8377;150</strong></td>
-                            <td><button class="view-details-btn" onclick="alert('Viewing details for bus AR-108')">View Details</button></td>
+                            <td><strong>07:00 AM</strong></td>
+                            <td>Tosham</td>
+                            <td>Bahal</td>
+                            <td>Bhariwas (khava)</td>
+                            <td>Ordinary</td>
+                            <td>Sub-depot</td>
+                            <td><button class="view-details-btn" onclick="window.location.href='route.html?from=Tosham&to=Bahal'">View Route</button></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- Route Stops & Note Section -->
-            <div class="bottom-grid">
-                <div class="card-box">
-                    <h4>Route & Stops</h4>
-                    <div class="timeline-steps">
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Hisar Bus Stand</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Hisar Cantt</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Mayyar Toll</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Hansi</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Garhi</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Sorkhi</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-dot"></div>
-                            <div class="step-label">Mundhal (End)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-box" style="display: flex; flex-direction: column; justify-content: center;">
-                    <div class="note-box">
-                        <strong><i class="fas fa-info-circle"></i> Note</strong>
-                        Timings are approximate and may vary due to traffic and weather conditions.
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -640,5 +471,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function filterBuses() {
+            const fromVal = document.getElementById('from-station').value.trim();
+            const toVal = document.getElementById('to-station').value.trim();
+
+            if (fromVal === "" || toVal === "") {
+                alert("Please enter both From and To stations!");
+            } else {
+                // Jaise index.html mein tha, waise hi route.html par redirect karega query parameters ke sath
+                window.location.href = `route.html?from=${encodeURIComponent(fromVal)}&to=${encodeURIComponent(toVal)}`;
+            }
+        }
+    </script>
 </body>
 </html>
