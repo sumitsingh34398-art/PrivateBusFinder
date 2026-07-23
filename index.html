@@ -17,21 +17,23 @@
         body {
             background-color: #f4f6f9;
             color: #333;
+            width: 100%;
+            overflow-x: hidden;
         }
         .container {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 100%;
+            margin: 0;
             background: #ffffff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
         /* Top Navigation */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 20px 60px;
             background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .brand {
             display: flex;
@@ -42,12 +44,12 @@
             background: #0d47a1;
             color: white;
             font-weight: 700;
-            font-size: 18px;
-            padding: 8px 12px;
+            font-size: 20px;
+            padding: 10px 14px;
             border-radius: 8px;
         }
         .brand-text h1 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: #111;
         }
@@ -57,14 +59,14 @@
         }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
         }
         .nav-links a {
             text-decoration: none;
             color: #222;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -73,28 +75,28 @@
             color: #0d47a1;
         }
 
-        /* Hero Section with Bus Background aligned to the right */
+        /* Hero Section with Provided Sunset Bus Background */
         .hero-section {
             position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80') no-repeat right center/cover;
-            height: 380px;
-            padding: 40px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://i.ibb.co/3m3v7g5/1000134094.png') no-repeat center center/cover;
+            min-height: 450px;
+            padding: 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             color: white;
         }
         .hero-content h2 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.2;
         }
         .hero-content h2 span {
             color: #2979ff;
         }
         .hero-features {
             margin-top: 15px;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 500;
             color: #e0e0e0;
         }
@@ -102,18 +104,18 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(13, 71, 161, 0.85);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-top: 20px;
-            font-size: 14px;
+            background: rgba(13, 71, 161, 0.9);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-top: 25px;
+            font-size: 15px;
         }
 
         /* Search Card Area */
         .search-container {
             display: flex;
             justify-content: center;
-            margin-top: -60px;
+            margin-top: -70px;
             z-index: 10;
             position: relative;
             padding: 0 20px;
@@ -121,51 +123,51 @@
         .search-card {
             background: #ffffff;
             width: 100%;
-            max-width: 800px;
-            padding: 35px;
+            max-width: 900px;
+            padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
         .search-title {
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #111;
         }
         .search-time {
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             color: #666;
-            margin-top: 5px;
-            margin-bottom: 25px;
+            margin-top: 8px;
+            margin-bottom: 30px;
         }
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         .input-group label {
             display: block;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             color: #555;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .input-wrapper {
             position: relative;
         }
         .input-wrapper i {
             position: absolute;
-            left: 16px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
             color: #333;
-            font-size: 15px;
+            font-size: 16px;
         }
         .input-field {
             width: 100%;
-            padding: 14px 14px 14px 45px;
-            border: 1px solid #e0e0e0;
+            padding: 16px 16px 16px 50px;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 16px;
             color: #333;
             background: #fafafa;
             outline: none;
@@ -179,9 +181,9 @@
             background: #1565c0;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -198,18 +200,18 @@
         .features-grid {
             display: flex;
             justify-content: space-around;
-            padding: 50px 40px;
+            padding: 60px 40px;
             background: #ffffff;
             text-align: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
         }
         .feature-item {
-            max-width: 200px;
+            max-width: 220px;
         }
         .feature-icon {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: #e3f2fd;
             color: #1565c0;
             border-radius: 50%;
@@ -217,36 +219,36 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 15px auto;
-            font-size: 22px;
+            font-size: 24px;
         }
         .feature-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: #111;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         .feature-desc {
-            font-size: 12px;
+            font-size: 13px;
             color: #666;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         /* Footer */
         .footer {
             background: #0b192c;
             color: white;
-            padding: 25px 40px;
+            padding: 30px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 14px;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
         .footer-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
         .footer-right {
             color: #b0bec5;
@@ -271,7 +273,7 @@
             </div>
         </div>
 
-        <!-- Hero Section with Background aligned to right -->
+        <!-- Hero Section -->
         <div class="hero-section">
             <div class="hero-content">
                 <h2>All Rounder<br><span>Private Bus</span></h2>
@@ -282,7 +284,7 @@
             </div>
         </div>
 
-        <!-- Search Card Box with Live JavaScript Clock -->
+        <!-- Search Card Box -->
         <div class="search-container">
             <div class="search-card">
                 <div class="search-title">Search Bus Timetable</div>
@@ -339,10 +341,10 @@
         <!-- Footer -->
         <div class="footer">
             <div class="footer-left">
-                <i class="fas fa-bus" style="font-size: 24px;"></i>
+                <i class="fas fa-bus" style="font-size: 28px;"></i>
                 <div>
                     <strong>All Rounder Private Bus</strong><br>
-                    <span style="font-size: 11px; color: #b0bec5;">Your Journey, Our Responsibility.</span>
+                    <span style="font-size: 12px; color: #b0bec5;">Your Journey, Our Responsibility.</span>
                 </div>
             </div>
             <div class="footer-right">
@@ -351,33 +353,29 @@
         </div>
     </div>
 
-    <!-- JavaScript for Live Updating Clock & Functionality -->
+    <!-- JavaScript for Fixed Live Clock -->
     <script>
         function updateClock() {
             const now = new Date();
             
-            // Format Day
             const day = String(now.getDate()).padStart(2, '0');
-            
-            // Format Month Abbreviation
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const month = months[now.getMonth()];
-            
-            // Format Year
             const year = now.getFullYear();
             
-            // Format Time (HH:MM:SS)
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             
-            // Combined format: DD-Mon-YYYY HH:MM:SS
             const formattedString = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
             
-            document.getElementById('live-clock').innerText = formattedString;
+            const clockElement = document.getElementById('live-clock');
+            if (clockElement) {
+                clockElement.innerText = formattedString;
+            }
         }
 
-        // Run clock immediately and update every second
+        // Run instantly and update every second
         updateClock();
         setInterval(updateClock, 1000);
 
