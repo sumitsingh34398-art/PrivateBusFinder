@@ -73,10 +73,10 @@
             color: #0d47a1;
         }
 
-        /* Hero Section with Bus Background */
+        /* Hero Section with Bus Background aligned to the right */
         .hero-section {
             position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80') no-repeat right center/cover;
             height: 380px;
             padding: 40px;
             display: flex;
@@ -271,7 +271,7 @@
             </div>
         </div>
 
-        <!-- Hero Section -->
+        <!-- Hero Section with Background aligned to right -->
         <div class="hero-section">
             <div class="hero-content">
                 <h2>All Rounder<br><span>Private Bus</span></h2>
@@ -282,11 +282,13 @@
             </div>
         </div>
 
-        <!-- Search Card Box -->
+        <!-- Search Card Box with Live JavaScript Clock -->
         <div class="search-container">
             <div class="search-card">
                 <div class="search-title">Search Bus Timetable</div>
-                <div class="search-time"><i class="far fa-clock"></i> 23-Jul-2026 11:41:22</div>
+                <div class="search-time">
+                    <i class="far fa-clock"></i> <span id="live-clock">Loading live time...</span>
+                </div>
                 
                 <div class="input-group">
                     <label>Boarding Station</label>
@@ -304,7 +306,7 @@
                     </div>
                 </div>
 
-                <button class="submit-btn">
+                <button class="submit-btn" onclick="searchBuses()">
                     <i class="fas fa-search"></i> Submit Query
                 </button>
             </div>
@@ -348,5 +350,40 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Live Updating Clock & Functionality -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Format Day
+            const day = String(now.getDate()).padStart(2, '0');
+            
+            // Format Month Abbreviation
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[now.getMonth()];
+            
+            // Format Year
+            const year = now.getFullYear();
+            
+            // Format Time (HH:MM:SS)
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            // Combined format: DD-Mon-YYYY HH:MM:SS
+            const formattedString = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+            
+            document.getElementById('live-clock').innerText = formattedString;
+        }
+
+        // Run clock immediately and update every second
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        function searchBuses() {
+            alert('Bus timetable search initiated successfully!');
+        }
+    </script>
 </body>
 </html>
