@@ -13,6 +13,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
         body {
             background-color: #f4f6f9;
@@ -34,6 +35,9 @@
             padding: 20px 60px;
             background: #ffffff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .brand {
             display: flex;
@@ -240,6 +244,26 @@
             line-height: 1.5;
         }
 
+        /* Extra Sections for Timetable & About to fix 404 */
+        .content-section {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .content-section h3 {
+            font-size: 24px;
+            color: #0d47a1;
+            margin-bottom: 15px;
+        }
+        .content-section p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+
         /* Footer */
         .footer {
             background: #0b192c;
@@ -294,7 +318,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="home">
         <!-- Navigation Bar -->
         <div class="navbar">
             <div class="brand">
@@ -305,9 +329,9 @@
                 </div>
             </div>
             <div class="nav-links">
-                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
-                <a href="timetable.html"><i class="fas fa-calendar-alt"></i> Timetable</a>
-                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="#timetable"><i class="fas fa-calendar-alt"></i> Timetable</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> About</a>
             </div>
         </div>
 
@@ -374,6 +398,18 @@
                 <div class="feature-title">24/7 Support</div>
                 <div class="feature-desc">We are always here to help you</div>
             </div>
+        </div>
+
+        <!-- Timetable Section (Added to prevent 404 error) -->
+        <div class="content-section" id="timetable">
+            <h3><i class="fas fa-calendar-alt"></i> Bus Timetable Schedule</h3>
+            <p>Use our search box above to find route timings or check back regularly for daily updated bus schedules across different cities and stops managed by All Rounder Private Bus.</p>
+        </div>
+
+        <!-- About Section (Added to prevent 404 error) -->
+        <div class="content-section" id="about">
+            <h3><i class="fas fa-info-circle"></i> About All Rounder Private Bus</h3>
+            <p>All Rounder Private Bus service provides safe, comfortable, and reliable transportation across major routes. Our mission is to ensure your journey is seamless with well-maintained buses and punctual timings.</p>
         </div>
 
         <!-- Footer -->
