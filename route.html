@@ -70,7 +70,7 @@
 
     <div class="page-header">
         <h2>Live Bus Timetable & Schedule</h2>
-        <p>Accurate and verified timing records for Hisar, Tosham and Bahal routes</p>
+        <p>Accurate and verified timing records for Hisar, Tosham, Bahal, Rampura and Pilani routes</p>
     </div>
 
     <div class="container">
@@ -133,7 +133,23 @@
             { time: "11:30 AM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
             { time: "13:20 PM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
             { time: "13:30 PM", from: "Tosham", to: "Bahal", via: "Gokalpura", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
-            { time: "15:00 PM", from: "Tosham", to: "Bahal", via: "—", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" }
+            { time: "15:00 PM", from: "Tosham", to: "Bahal", via: "—", type: "Ordinary", operator: "Tosham (sub-depot)", days: "All Days" },
+
+            // Rampura to Pilani Buses (Newly Added)
+            { time: "08:30 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" },
+            { time: "10:00 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Pawan Bus Travels", days: "All Days" },
+            { time: "11:15 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "No Name Bus Travels", days: "All Days" },
+            { time: "11:45 AM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Mini Bus Travels", days: "All Days" },
+            { time: "12:45 PM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" },
+            { time: "02:30 PM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Confirm Nhi Bus Travels", days: "All Days" },
+            { time: "04:30 PM", from: "Rampura", to: "Pilani", via: "Beri, Bangothari, Hemeenpur, Bishanpura", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" },
+
+            // Rampura to Bahal Buses (Newly Added)
+            { time: "09:00 AM", from: "Rampura", to: "Bahal", via: "Gugalwa, Sorda Jadid, Sorda Kadim", type: "Ordinary", operator: "Mini Bus Travels", days: "All Days" },
+
+            // Pilani to Rampura Buses (Newly Added)
+            { time: "08:00 AM", from: "Pilani", to: "Rampura", via: "Bishanpura, Hemeenpur, Bangothari, Beri", type: "Ordinary", operator: "Mini Bus Travels", days: "All Days" },
+            { time: "10:15 AM", from: "Pilani", to: "Rampura", via: "Bishanpura, Hemeenpur, Bangothari, Beri", type: "Ordinary", operator: "Billu Bus Travels", days: "All Days" }
         ];
 
         function renderTable(buses, routeText) {
@@ -158,7 +174,7 @@
                     </tr>`;
                 });
             } else {
-                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b; padding: 30px;">No buses found matching your search. Please try searching 'Hisar' to 'Tosham' or 'Tosham' to 'Bahal'.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b; padding: 30px;">No buses found matching your search. Please try searching other routes like 'Rampura' to 'Pilani'.</td></tr>`;
             }
         }
 
