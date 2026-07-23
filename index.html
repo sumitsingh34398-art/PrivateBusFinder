@@ -70,6 +70,11 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #0d47a1;
         }
         .nav-links a i {
             color: #0d47a1;
@@ -267,9 +272,9 @@
                 </div>
             </div>
             <div class="nav-links">
-                <a href="#"><i class="fas fa-home"></i> Home</a>
-                <a href="#"><i class="fas fa-calendar-alt"></i> Timetable</a>
-                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#" onclick="navigatePage('Home')"><i class="fas fa-home"></i> Home</a>
+                <a href="#" onclick="navigatePage('Timetable')"><i class="fas fa-calendar-alt"></i> Timetable</a>
+                <a href="#" onclick="navigatePage('About')"><i class="fas fa-info-circle"></i> About</a>
             </div>
         </div>
 
@@ -296,7 +301,7 @@
                     <label>Boarding Station</label>
                     <div class="input-wrapper">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" class="input-field" placeholder="Enter boarding station">
+                        <input type="text" id="boarding-input" class="input-field" placeholder="Enter boarding station">
                     </div>
                 </div>
 
@@ -304,7 +309,7 @@
                     <label>Destination Station</label>
                     <div class="input-wrapper">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" class="input-field" placeholder="Enter destination station">
+                        <input type="text" id="destination-input" class="input-field" placeholder="Enter destination station">
                     </div>
                 </div>
 
@@ -353,7 +358,7 @@
         </div>
     </div>
 
-    <!-- JavaScript for Live Clock -->
+    <!-- JavaScript for Live Clock and Interactive Actions -->
     <script>
         function updateClock() {
             const now = new Date();
@@ -379,8 +384,21 @@
         updateClock();
         setInterval(updateClock, 1000);
 
+        // Clickable navigation handler
+        function navigatePage(pageName) {
+            alert("Navigating to " + pageName + " Section.");
+        }
+
+        // Search Bus Timetable action handler on Submit Query click
         function searchBuses() {
-            alert('Bus timetable search initiated successfully!');
+            const boarding = document.getElementById('boarding-input').value.trim();
+            const destination = document.getElementById('destination-input').value.trim();
+
+            if (boarding === "" || destination === "") {
+                alert("Please enter both Boarding and Destination stations!");
+            } else {
+                alert("Searching buses from " + boarding + " to " + destination + " successfully initiated!");
+            }
         }
     </script>
 </body>
