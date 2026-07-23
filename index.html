@@ -453,7 +453,7 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Search Bus Timetable action handler on Submit Query click
+        // Search Bus Timetable action handler on Submit Query click (Updated to redirect to route.html)
         function searchBuses() {
             const boarding = document.getElementById('boarding-input').value.trim();
             const destination = document.getElementById('destination-input').value.trim();
@@ -461,7 +461,8 @@
             if (boarding === "" || destination === "") {
                 alert("Please enter both Boarding and Destination stations!");
             } else {
-                alert("Searching buses from " + boarding + " to " + destination + " successfully initiated!");
+                // User ko route.html par bhej dega search query ke saath
+                window.location.href = `route.html?from=${encodeURIComponent(boarding)}&to=${encodeURIComponent(destination)}`;
             }
         }
     </script>
