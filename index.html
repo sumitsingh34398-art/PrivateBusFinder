@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Rounder Private Bus</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+        /* Top Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #ffffff;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand-logo {
+            background: #0d47a1;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        .brand-text h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+        }
+        .brand-text p {
+            font-size: 13px;
+            color: #555;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a i {
+            color: #0d47a1;
+        }
+
+        /* Hero Section with Bus Background */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 380px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+        }
+        .hero-content h2 {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        .hero-content h2 span {
+            color: #2979ff;
+        }
+        .hero-features {
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(13, 71, 161, 0.85);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* Search Card Area */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: -60px;
+            z-index: 10;
+            position: relative;
+            padding: 0 20px;
+        }
+        .search-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 800px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+        .search-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #111;
+        }
+        .search-time {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+            font-size: 15px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #333;
+            background: #fafafa;
+            outline: none;
+        }
+        .input-field:focus {
+            border-color: #1565c0;
+            background: #fff;
+        }
+        .submit-btn {
+            width: 100%;
+            background: #1565c0;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: #0d47a1;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 40px;
+            background: #ffffff;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature-item {
+            max-width: 200px;
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            color: #1565c0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            font-size: 22px;
+        }
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 5px;
+        }
+        .feature-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0b192c;
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .footer-right {
+            color: #b0bec5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div class="brand">
+                <div class="brand-logo">AR</div>
+                <div class="brand-text">
+                    <h1>All Rounder</h1>
+                    <p>Private Bus</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-calendar-alt"></i> Timetable</a>
+                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>All Rounder<br><span>Private Bus</span></h2>
+                <div class="hero-features">Comfort &bull; Safety &bull; On Time</div>
+                <div class="badge">
+                    <i class="fas fa-shield-alt"></i> Safe Travel, Happy Journey
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Card Box -->
+        <div class="search-container">
+            <div class="search-card">
+                <div class="search-title">Search Bus Timetable</div>
+                <div class="search-time"><i class="far fa-clock"></i> 23-Jul-2026 11:41:22</div>
+                
+                <div class="input-group">
+                    <label>Boarding Station</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" class="input-field" placeholder="Enter boarding station">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Destination Station</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" class="input-field" placeholder="Enter destination station">
+                    </div>
+                </div>
+
+                <button class="submit-btn">
+                    <i class="fas fa-search"></i> Submit Query
+                </button>
+            </div>
+        </div>
+
+        <!-- Features Icons Section -->
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-route"></i></div>
+                <div class="feature-title">Many Routes</div>
+                <div class="feature-desc">Covering more cities across India</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-bus"></i></div>
+                <div class="feature-title">Comfortable Buses</div>
+                <div class="feature-desc">Well maintained buses for your comfort</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <div class="feature-title">On Time Service</div>
+                <div class="feature-desc">Punctual and reliable service</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <div class="feature-title">24/7 Support</div>
+                <div class="feature-desc">We are always here to help you</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-left">
+                <i class="fas fa-bus" style="font-size: 24px;"></i>
+                <div>
+                    <strong>All Rounder Private Bus</strong><br>
+                    <span style="font-size: 11px; color: #b0bec5;">Your Journey, Our Responsibility.</span>
+                </div>
+            </div>
+            <div class="footer-right">
+                &copy; 2026 All Rounder Private Bus. All rights reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
