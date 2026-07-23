@@ -4,316 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Rounder Private Bus</title>
-    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        .container {
-            width: 100%;
-            max-width: 100%;
-            margin: 0;
-            background: #ffffff;
-        }
-        /* Top Navigation */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 60px;
-            background: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .brand-logo {
-            background: #0d47a1;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
-            padding: 10px 14px;
-            border-radius: 8px;
-        }
-        .brand-text h1 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #111;
-        }
-        .brand-text p {
-            font-size: 13px;
-            color: #555;
-        }
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #222;
-            font-weight: 500;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: color 0.2s;
-            padding-bottom: 4px;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: #0d47a1;
-            border-bottom: 2px solid #0d47a1;
-        }
-        .nav-links a i {
-            color: #0d47a1;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #f4f6f9; color: #333; width: 100%; overflow-x: hidden; }
+        .container { width: 100%; max-width: 100%; margin: 0; background: #ffffff; }
+        
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-logo { background: #0d47a1; color: white; font-weight: 700; font-size: 20px; padding: 10px 14px; border-radius: 8px; }
+        .brand-text h1 { font-size: 20px; font-weight: 700; color: #111; }
+        .brand-text p { font-size: 13px; color: #555; }
+        
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #222; font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: color 0.2s; padding-bottom: 4px; }
+        .nav-links a:hover, .nav-links a.active { color: #0d47a1; border-bottom: 2px solid #0d47a1; }
+        .nav-links a i { color: #0d47a1; }
 
-        /* Hero Section with Premium Clean Bus Background Aligned to the Right */
-        .hero-section {
-            position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1600&q=80') no-repeat 90% center / cover;
-            min-height: 480px;
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            color: white;
-        }
-        .hero-content h2 {
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        .hero-content h2 span {
-            color: #2979ff;
-        }
-        .hero-features {
-            margin-top: 15px;
-            font-size: 18px;
-            font-weight: 500;
-            color: #e0e0e0;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(13, 71, 161, 0.9);
-            padding: 10px 20px;
-            border-radius: 30px;
-            margin-top: 25px;
-            font-size: 15px;
-        }
+        .hero-section { position: relative; background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1600&q=80') no-repeat 90% center / cover; min-height: 480px; padding: 60px; display: flex; flex-direction: column; justify-content: center; color: white; }
+        .hero-content h2 { font-size: 48px; font-weight: 700; line-height: 1.2; }
+        .hero-content h2 span { color: #2979ff; }
+        .hero-features { margin-top: 15px; font-size: 18px; font-weight: 500; color: #e0e0e0; }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(13, 71, 161, 0.9); padding: 10px 20px; border-radius: 30px; margin-top: 25px; font-size: 15px; }
 
-        /* Search Card Area */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin-top: -70px;
-            z-index: 10;
-            position: relative;
-            padding: 0 20px;
-        }
-        .search-card {
-            background: #ffffff;
-            width: 100%;
-            max-width: 950px;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-        .search-title {
-            text-align: center;
-            font-size: 26px;
-            font-weight: 700;
-            color: #111;
-        }
-        .search-time {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-top: 8px;
-            margin-bottom: 30px;
-        }
-        .input-group {
-            margin-bottom: 25px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 8px;
-        }
-        .input-wrapper {
-            position: relative;
-        }
-        .input-wrapper i {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #333;
-            font-size: 16px;
-        }
-        .input-field {
-            width: 100%;
-            padding: 16px 16px 16px 50px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            color: #333;
-            background: #fafafa;
-            outline: none;
-        }
-        .input-field:focus {
-            border-color: #1565c0;
-            background: #fff;
-        }
-        .submit-btn {
-            width: 100%;
-            background: #1565c0;
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: background 0.3s;
-        }
-        .submit-btn:hover {
-            background: #0d47a1;
-        }
+        .search-container { display: flex; justify-content: center; margin-top: -70px; z-index: 10; position: relative; padding: 0 20px; }
+        .search-card { background: #ffffff; width: 100%; max-width: 950px; padding: 40px; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); }
+        .search-title { text-align: center; font-size: 26px; font-weight: 700; color: #111; }
+        .search-time { text-align: center; font-size: 14px; color: #666; margin-top: 8px; margin-bottom: 30px; }
+        
+        .input-group { margin-bottom: 25px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+        .input-wrapper { position: relative; }
+        .input-wrapper i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #333; font-size: 16px; }
+        .input-field { width: 100%; padding: 16px 16px 16px 50px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; color: #333; background: #fafafa; outline: none; }
+        .input-field:focus { border-color: #1565c0; background: #fff; }
+        
+        .submit-btn { width: 100%; background: #1565c0; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.3s; }
+        .submit-btn:hover { background: #0d47a1; }
 
-        /* Features Grid */
-        .features-grid {
-            display: flex;
-            justify-content: space-around;
-            padding: 60px 40px;
-            background: #ffffff;
-            text-align: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        .feature-item {
-            max-width: 220px;
-        }
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: #e3f2fd;
-            color: #1565c0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px auto;
-            font-size: 24px;
-        }
-        .feature-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 8px;
-        }
-        .feature-desc {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.5;
-        }
+        .features-grid { display: flex; justify-content: space-around; padding: 60px 40px; background: #ffffff; text-align: center; flex-wrap: wrap; gap: 30px; }
+        .feature-item { max-width: 220px; }
+        .feature-icon { width: 70px; height: 70px; background: #e3f2fd; color: #1565c0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 24px; }
+        .feature-title { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 8px; }
+        .feature-desc { font-size: 13px; color: #666; line-height: 1.5; }
 
-        /* Extra Sections for Timetable & About to fix 404 */
-        .content-section {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 40px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .content-section h3 {
-            font-size: 24px;
-            color: #0d47a1;
-            margin-bottom: 15px;
-        }
-        .content-section p {
-            font-size: 15px;
-            color: #555;
-            line-height: 1.6;
-        }
+        .footer { background: #0b192c; color: white; padding: 30px 60px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; flex-wrap: wrap; gap: 20px; }
+        .footer-left { display: flex; align-items: center; gap: 15px; }
+        .footer-right { color: #b0bec5; }
 
-        /* Footer */
-        .footer {
-            background: #0b192c;
-            color: white;
-            padding: 30px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .footer-right {
-            color: #b0bec5;
-        }
-
-        /* Mobile Responsive Media Queries */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 15px;
-            }
-            .nav-links {
-                gap: 20px;
-            }
-            .hero-section {
-                padding: 30px 20px;
-                min-height: 380px;
-                background-position: 75% center;
-            }
-            .hero-content h2 {
-                font-size: 32px;
-            }
-            .search-card {
-                padding: 20px;
-            }
-            .features-grid {
-                padding: 30px 20px;
-            }
-            .footer {
-                padding: 20px;
-                flex-direction: column;
-                text-align: center;
-            }
+            .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .nav-links { gap: 20px; }
+            .hero-section { padding: 30px 20px; min-height: 380px; }
+            .hero-content h2 { font-size: 32px; }
+            .search-card { padding: 20px; }
+            .features-grid { padding: 30px 20px; }
+            .footer { padding: 20px; flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -329,9 +76,9 @@
                 </div>
             </div>
             <div class="nav-links">
-                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
-                <a href="#timetable"><i class="fas fa-calendar-alt"></i> Timetable</a>
-                <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="timetable.html"><i class="fas fa-calendar-alt"></i> Timetable</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
             </div>
         </div>
 
@@ -400,18 +147,6 @@
             </div>
         </div>
 
-        <!-- Timetable Section (Added to prevent 404 error) -->
-        <div class="content-section" id="timetable">
-            <h3><i class="fas fa-calendar-alt"></i> Bus Timetable Schedule</h3>
-            <p>Use our search box above to find route timings or check back regularly for daily updated bus schedules across different cities and stops managed by All Rounder Private Bus.</p>
-        </div>
-
-        <!-- About Section (Added to prevent 404 error) -->
-        <div class="content-section" id="about">
-            <h3><i class="fas fa-info-circle"></i> About All Rounder Private Bus</h3>
-            <p>All Rounder Private Bus service provides safe, comfortable, and reliable transportation across major routes. Our mission is to ensure your journey is seamless with well-maintained buses and punctual timings.</p>
-        </div>
-
         <!-- Footer -->
         <div class="footer">
             <div class="footer-left">
@@ -427,33 +162,26 @@
         </div>
     </div>
 
-    <!-- JavaScript for Live Clock and Interactive Actions -->
     <script>
         function updateClock() {
             const now = new Date();
-            
             const day = String(now.getDate()).padStart(2, '0');
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const month = months[now.getMonth()];
             const year = now.getFullYear();
-            
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             
             const formattedString = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
-            
             const clockElement = document.getElementById('live-clock');
             if (clockElement) {
                 clockElement.innerText = formattedString;
             }
         }
-
-        // Run instantly and update every second
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Search Bus Timetable action handler on Submit Query click (Updated to redirect to route.html)
         function searchBuses() {
             const boarding = document.getElementById('boarding-input').value.trim();
             const destination = document.getElementById('destination-input').value.trim();
@@ -461,7 +189,6 @@
             if (boarding === "" || destination === "") {
                 alert("Please enter both Boarding and Destination stations!");
             } else {
-                // User ko route.html par bhej dega search query ke saath
                 window.location.href = `route.html?from=${encodeURIComponent(boarding)}&to=${encodeURIComponent(destination)}`;
             }
         }
